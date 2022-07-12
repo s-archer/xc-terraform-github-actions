@@ -37,19 +37,39 @@ jobs:
           tf_actions_comment: true
           args: '-var-file="vars.tfvars"'
 
-      - name: Terraform Validate
+      # - name: Terraform Validate
+      #   id: validate
+      #   run: terraform validate -no-color
+      #   with:
+      #     args: '-var-file="vars.tfvars"'
+
+      - name: 'Terraform Validate'
         id: validate
-        run: terraform validate -no-color
+        uses: hashicorp/terraform-github-actions@master
         with:
+          tf_actions_subcommand: 'validate'
+          tf_actions_working_dir: '.'
+          tf_actions_comment: true
           args: '-var-file="vars.tfvars"'
 
-      - name: Terraform Plan
+      # - name: Terraform Plan
+      #   id: plan
+      #   if: github.event_name == 'pull_request'
+      #   run: terraform plan -no-color -input=false 
+      #   continue-on-error: true
+      #   with:
+      #     args: '-var-file="vars.tfvars"'
+
+      - name: 'Terraform Plan'
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false 
+        uses: hashicorp/terraform-github-actions@master
         continue-on-error: true
         with:
-          args: '-var-file="vars.tfvars"'
+          tf_actions_subcommand: 'validate'
+          tf_actions_working_dir: '.'
+          tf_actions_comment: true
+          args: '-input=false -var-file="vars.tfvars"'
 
       - uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
