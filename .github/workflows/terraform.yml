@@ -16,24 +16,24 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.2.4
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      - name: Setup Terraform variables
-        id: vars
-        run: |-
-          cat > pipeline.auto.tfvars <<EOF
-          API_P12_PATH = "../../creds/galileo.console.ves.volterra.io.api-creds.p12"
-          TENANT       = "galileo"
-          NAMESPACE    = "arch"
-          SHORTNAME    = "nginx-cc1"
-          ORIGIN_PORT  = 80
-          ORIGIN_IP    = "10.0.0.3"
-          ORIGIN_SITE  = "gcp-test-site"
-          DOMAIN_NAME  = "testing.vol"
-          EOF
+      # - name: Setup Terraform variables
+      #   id: vars
+      #   run: |-
+      #     cat > pipeline.auto.tfvars <<EOF
+      #     API_P12_PATH = "../../creds/galileo.console.ves.volterra.io.api-creds.p12"
+      #     TENANT       = "galileo"
+      #     NAMESPACE    = "arch"
+      #     SHORTNAME    = "nginx-cc1"
+      #     ORIGIN_PORT  = 80
+      #     ORIGIN_IP    = "10.0.0.3"
+      #     ORIGIN_SITE  = "gcp-test-site"
+      #     DOMAIN_NAME  = "testing.vol"
+      #     EOF
 
       - name: Terraform Format
         id: fmt
