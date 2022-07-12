@@ -66,7 +66,7 @@ jobs:
         uses: hashicorp/terraform-github-actions@master
         continue-on-error: true
         with:
-          tf_actions_subcommand: 'validate'
+          tf_actions_subcommand: 'plan'
           tf_actions_working_dir: '.'
           tf_actions_comment: true
           args: '-input=false -var-file="vars.tfvars"'
@@ -104,8 +104,17 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-      - name: Terraform Apply
+      # - name: Terraform Apply
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   run: terraform apply -auto-approve -input=false 
+      #   with:
+      #     args: '-var-file="vars.tfvars"' 
+
+      - name: 'Terraform Apply'
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false 
+        uses: hashicorp/terraform-github-actions@master
         with:
-          args: '-var-file="vars.tfvars"' 
+          tf_actions_subcommand: 'apply'
+          tf_actions_working_dir: '.'
+          tf_actions_comment: true
+          args: ' -auto-approve -input=false -var-file="vars.tfvars"'
