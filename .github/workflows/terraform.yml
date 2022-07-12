@@ -10,7 +10,7 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
-   # environment: galileo-env-v01
+    environment: production
     steps:
       - name: Checkout
         uses: actions/checkout@v3
