@@ -55,7 +55,7 @@ jobs:
 
       - name: Terraform Validate
         id: validate
-        run: terraform validate -var-file="vars.tfvars"
+        run: terraform validate
 
       # - name: 'Terraform Validate'
       #   id: validate
