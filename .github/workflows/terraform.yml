@@ -54,7 +54,6 @@ jobs:
           tf_actions_working_dir: '.'
           tf_actions_comment: true
           tf_actions_cli_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          args: '-var-file="vars.tfvars"'
 
       # - name: Terraform Plan
       #   id: plan
