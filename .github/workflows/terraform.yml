@@ -31,13 +31,17 @@ jobs:
       
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color -var-file="vars.tfvars"
+        run: terraform validate -no-color 
+        with:
+          args: '-var-file="vars.tfvars"'
 
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false -var-file="vars.tfvars" 
+        run: terraform plan -no-color -input=false 
         continue-on-error: true
+        with:
+          args: '-var-file="vars.tfvars"'
 
       - uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
@@ -74,4 +78,6 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false -var-file="vars.tfvars" 
+        run: terraform apply -auto-approve -input=false 
+        with:
+          args: '-var-file="vars.tfvars"' 
