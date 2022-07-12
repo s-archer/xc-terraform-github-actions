@@ -21,60 +21,71 @@ jobs:
           terraform_version: 1.2.4
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
+      - name: Setup Terraform variables
+        id: vars
+        run: |-
+          cat > pipeline.auto.tfvars <<EOF
+            API_P12_PATH = "../../creds/galileo.console.ves.volterra.io.api-creds.p12"
+            TENANT       = "galileo"
+            NAMESPACE    = "arch"
+            SHORTNAME    = "nginx-cc1"
+            ORIGIN_PORT  = 80
+            ORIGIN_IP    = "10.0.0.3"
+            ORIGIN_SITE  = "gcp-test-site"
+            DOMAIN_NAME  = "testing.vol"
+          EOF
+
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
 
-      # - name: Terraform Init
-      #   id: init
-      #   run: terraform init
+      - name: Terraform Init
+        id: init
+        run: terraform init
 
-      - name: 'Terraform Init'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 1.2.4
-          tf_actions_subcommand: 'init'
-          tf_actions_working_dir: '.'
-          tf_actions_comment: true
-          tf_actions_cli_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          args: '-var-file="vars.tfvars"'
-
-      # - name: Terraform Validate
-      #   id: validate
-      #   run: terraform validate -no-color
+      # - name: 'Terraform Init'
+      #   uses: hashicorp/terraform-github-actions@master
       #   with:
+      #     tf_actions_version: 1.2.4
+      #     tf_actions_subcommand: 'init'
+      #     tf_actions_working_dir: '.'
+      #     tf_actions_comment: true
+      #     tf_actions_cli_credentials_token: ${{ secrets.TF_API_TOKEN }}
       #     args: '-var-file="vars.tfvars"'
 
-      - name: 'Terraform Validate'
+      - name: Terraform Validate
         id: validate
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 1.2.4
-          tf_actions_subcommand: 'validate'
-          tf_actions_working_dir: '.'
-          tf_actions_comment: true
-          tf_actions_cli_credentials_token: ${{ secrets.TF_API_TOKEN }}
+        run: terraform validate -var-file="vars.tfvars"
 
-      # - name: Terraform Plan
-      #   id: plan
-      #   if: github.event_name == 'pull_request'
-      #   run: terraform plan -no-color -input=false 
-      #   continue-on-error: true
+      # - name: 'Terraform Validate'
+      #   id: validate
+      #   uses: hashicorp/terraform-github-actions@master
       #   with:
+      #     tf_actions_version: 1.2.4
+      #     tf_actions_subcommand: 'validate'
+      #     tf_actions_working_dir: '.'
+      #     tf_actions_comment: true
+      #     tf_actions_cli_credentials_token: ${{ secrets.TF_API_TOKEN }}
       #     args: '-var-file="vars.tfvars"'
 
-      - name: 'Terraform Plan'
+      - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        uses: hashicorp/terraform-github-actions@master
+        run: terraform plan -no-color -input=false 
         continue-on-error: true
-        with:
-          tf_actions_version: 1.2.4
-          tf_actions_subcommand: 'plan'
-          tf_actions_working_dir: '.'
-          tf_actions_comment: true
-          tf_actions_cli_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          args: '-input=false -var-file="vars.tfvars"'
+
+      # - name: 'Terraform Plan'
+      #   id: plan
+      #   if: github.event_name == 'pull_request'
+      #   uses: hashicorp/terraform-github-actions@master
+      #   continue-on-error: true
+      #   with:
+      #     tf_actions_version: 1.2.4
+      #     tf_actions_subcommand: 'plan'
+      #     tf_actions_working_dir: '.'
+      #     tf_actions_comment: true
+      #     tf_actions_cli_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      #     args: '-input=false -var-file="vars.tfvars"'
 
       - uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
@@ -109,19 +120,17 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-      # - name: Terraform Apply
-      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      #   run: terraform apply -auto-approve -input=false 
-      #   with:
-      #     args: '-var-file="vars.tfvars"' 
-
-      - name: 'Terraform Apply'
+      - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 1.2.4
-          tf_actions_subcommand: 'apply'
-          tf_actions_working_dir: '.'
-          tf_actions_comment: true
-          tf_actions_cli_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          args: ' -auto-approve -input=false -var-file="vars.tfvars"'
+        run: terraform apply -auto-approve -input=false 
+
+      # - name: 'Terraform Apply'
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   uses: hashicorp/terraform-github-actions@master
+      #   with:
+      #     tf_actions_version: 1.2.4
+      #     tf_actions_subcommand: 'apply'
+      #     tf_actions_working_dir: '.'
+      #     tf_actions_comment: true
+      #     tf_actions_cli_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      #     args: ' -auto-approve -input=false -var-file="vars.tfvars"'
