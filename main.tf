@@ -54,10 +54,10 @@ resource "volterra_origin_pool" "gcp-origin" {
 }
 
 resource "volterra_http_loadbalancer" "gcp-nginx-lb" {
-  name                   = format("gcp-%s-tf", var.SHORTNAME)
-  namespace              = var.NAMESPACE
-  description            = "Created by Terraform"
-  domains                = [var.DOMAIN_NAME]
+  name        = format("gcp-%s-tf", var.SHORTNAME)
+  namespace   = var.NAMESPACE
+  description = "Created by Terraform"
+  domains     = [var.DOMAIN_NAME]
 
   advertise_on_public_default_vip = true
   no_challenge                    = true
@@ -67,12 +67,12 @@ resource "volterra_http_loadbalancer" "gcp-nginx-lb" {
   disable_waf                     = true
   multi_lb_app                    = true
   user_id_client_ip               = true
-  
+
   https_auto_cert {
-    add_hsts       = false
-    http_redirect  = true
-    no_mtls        = true
-    default_header = true
+    add_hsts               = false
+    http_redirect          = true
+    no_mtls                = true
+    default_header         = true
     disable_path_normalize = true
 
     tls_config {
