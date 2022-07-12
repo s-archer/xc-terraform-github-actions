@@ -2,12 +2,19 @@ terraform {
   required_providers {
     volterra = {
       source  = "volterraedge/volterra"
-      version = "0.11.2"
+      version = "0.11.9"
     }
     # azurerm = {
     #   source  = "hashicorp/azurerm"
     #   version = "=2.46.0"
     # }
+  }
+  cloud {
+    organization = "f5ukse"
+
+    workspaces {
+      name = "xc-terraform-github-actions"
+    }
   }
 }
 
