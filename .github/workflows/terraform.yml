@@ -39,7 +39,7 @@ jobs:
       #     DOMAIN_NAME  = "testing.vol"
       #     EOF
       - name: Env Var Debug
-        id: fmt
+        id: debug
         run: echo "$VES_P12_PASSWORD"
 
       - name: Terraform Format
