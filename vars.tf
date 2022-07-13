@@ -2,11 +2,11 @@ variable "TENANT" {
   type = string
 }
 
-# variable "API_P12_PATH" {
-#   type = string
-# }
+variable "API_CERT" {
+  type = string
+}
 
-variable "VOLT_API_P12_FILE" {
+variable "API_KEY" {
   type = string
 }
 

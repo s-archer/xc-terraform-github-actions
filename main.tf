@@ -20,8 +20,9 @@ terraform {
 
 provider "volterra" {
   # Configuration options.
-  url          = format("https://%s.console.ves.volterra.io/api", var.TENANT)
-  api_p12_file = base64decode(var.VOLT_API_P12_FILE)
+  url      = format("https://%s.console.ves.volterra.io/api", var.TENANT)
+  api_cert = var.api_cert
+  api_key  = var.api_key
 }
 
 

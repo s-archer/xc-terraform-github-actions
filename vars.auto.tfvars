@@ -1,4 +1,3 @@
-# API_P12_PATH = "../../creds/galileo.console.ves.volterra.io.api-creds.p12"
 TENANT      = "galileo"
 NAMESPACE   = "arch"
 SHORTNAME   = "nginx-cc1"
