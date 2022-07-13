@@ -10,6 +10,9 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
+    env:
+      VOLT_API_P12_FILE: ${{ secrets.VOLT_API_P12_FILE }}
+      VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
     # environment: production
     steps:
       - name: Checkout
@@ -20,6 +23,7 @@ jobs:
         with:
           terraform_version: 1.2.4
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
 
       # - name: Setup Terraform variables
       #   id: vars

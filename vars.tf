@@ -2,9 +2,9 @@ variable "TENANT" {
   type = string
 }
 
-variable "API_P12_PATH" {
-  type = string
-}
+# variable "API_P12_PATH" {
+#   type = string
+# }
 
 variable "NAMESPACE" {
   type = string
