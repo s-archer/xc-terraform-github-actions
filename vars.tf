@@ -2,11 +2,7 @@ variable "tenant" {
   type = string
 }
 
-variable "api_cert" {
-  type = string
-}
-
-variable "api_key" {
+variable "api_p12_file" {
   type = string
 }
 
