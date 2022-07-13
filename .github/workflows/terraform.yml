@@ -10,9 +10,9 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
-    env:
-      TF_api_cert: ${{ secrets.TF_API_CERT }}
-      TF_api_key: ${{ secrets.TF_API_KEY }}
+    # env:
+    #   TF_api_cert: ${{ secrets.TF_API_CERT }}
+    #   TF_api_key: ${{ secrets.TF_API_KEY }}
     # environment: production
     steps:
       - name: Checkout
@@ -38,9 +38,6 @@ jobs:
       #     ORIGIN_SITE  = "gcp-test-site"
       #     DOMAIN_NAME  = "testing.vol"
       #     EOF
-      - name: Env Var Debug
-        id: debug
-        run: echo "$VES_P12_PASSWORD"
 
       # - name: Terraform Format
       #   id: fmt
