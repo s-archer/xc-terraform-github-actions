@@ -38,6 +38,9 @@ jobs:
       #     ORIGIN_SITE  = "gcp-test-site"
       #     DOMAIN_NAME  = "testing.vol"
       #     EOF
+      - name: Env Var Debug
+        id: fmt
+        run: echo "$VES_P12_PASSWORD"
 
       - name: Terraform Format
         id: fmt

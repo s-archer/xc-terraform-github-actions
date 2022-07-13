@@ -21,7 +21,7 @@ terraform {
 provider "volterra" {
   # Configuration options.
   url = format("https://%s.console.ves.volterra.io/api", var.TENANT)
-  # api_p12_file = var.API_P12_PATH
+  #  api_p12_file = var.API_P12_PATH
 }
 
 # provider "azurerm" {
