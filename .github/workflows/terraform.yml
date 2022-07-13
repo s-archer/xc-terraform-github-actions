@@ -11,7 +11,7 @@ jobs:
     name: "Terraform"
     runs-on: ubuntu-latest
     env:
-      VOLT_API_P12_FILE: ${{ secrets.VOLT_API_P12_FILE }}
+      TF_VAR_VOLT_API_P12_FILE: ${{ secrets.VOLT_API_P12_FILE }}
       VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
     # environment: production
     steps:

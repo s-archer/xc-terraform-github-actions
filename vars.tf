@@ -6,6 +6,10 @@ variable "TENANT" {
 #   type = string
 # }
 
+variable "VOLT_API_P12_FILE" {
+  type = string
+}
+
 variable "NAMESPACE" {
   type = string
 }
