@@ -4,8 +4,8 @@ variable "TENANT" {
 }
 
 variable "API_P12_PATH" {
-  type     = string
-  default  = "/p12.fake"
+  type    = string
+  default = "/p12.fake"
 }
 
 variable "NAMESPACE" {
