@@ -1,35 +1,35 @@
-variable "TENANT" {
+variable "tenant" {
   type = string
 }
 
-variable "API_CERT" {
+variable "api_cert" {
   type = string
 }
 
-variable "API_KEY" {
+variable "api_key" {
   type = string
 }
 
-variable "NAMESPACE" {
+variable "namespace" {
   type = string
 }
 
-variable "SHORTNAME" {
+variable "shortname" {
   type = string
 }
 
-variable "ORIGIN_PORT" {
+variable "origin_port" {
   type = string
 }
 
-variable "ORIGIN_IP" {
+variable "origin_ip" {
   type = string
 }
 
-variable "ORIGIN_SITE" {
+variable "origin_site" {
   type = string
 }
 
-variable "DOMAIN_NAME" {
+variable "domain_name" {
   type = string
 }

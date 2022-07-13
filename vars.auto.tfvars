@@ -1,7 +1,7 @@
-TENANT      = "galileo"
-NAMESPACE   = "arch"
-SHORTNAME   = "nginx-cc1"
-ORIGIN_PORT = 80
-ORIGIN_IP   = "10.0.0.3"
-ORIGIN_SITE = "gcp-test-site"
-DOMAIN_NAME = "testing.vol"
+tenant      = "galileo"
+namespace   = "arch"
+shortname   = "nginx-cc1"
+origin_port = 80
+origin_ip   = "10.0.0.3"
+origin_site = "gcp-test-site"
+domain_name = "testing.vol"

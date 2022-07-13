@@ -20,7 +20,7 @@ terraform {
 
 provider "volterra" {
   # Configuration options.
-  url      = format("https://%s.console.ves.volterra.io/api", var.TENANT)
+  url      = format("https://%s.console.ves.volterra.io/api", var.tenant)
   api_cert = var.api_cert
   api_key  = var.api_key
 }
@@ -28,24 +28,24 @@ provider "volterra" {
 
 
 resource "volterra_origin_pool" "gcp-origin" {
-  name                   = format("gcp-%s-tf", var.SHORTNAME)
-  namespace              = var.NAMESPACE
+  name                   = format("gcp-%s-tf", var.shortname)
+  namespace              = var.namespace
   description            = "Created by Terraform"
   endpoint_selection     = "LOCAL_PREFERRED"
   loadbalancer_algorithm = "LB_OVERRIDE"
 
-  port   = var.ORIGIN_PORT
+  port   = var.origin_port
   no_tls = true
 
   origin_servers {
     private_ip {
-      ip              = var.ORIGIN_IP
+      ip              = var.origin_ip
       outside_network = true
       site_locator {
         site {
           tenant    = null
           namespace = "system"
-          name      = var.ORIGIN_SITE
+          name      = var.origin_site
         }
       }
     }
@@ -53,10 +53,10 @@ resource "volterra_origin_pool" "gcp-origin" {
 }
 
 resource "volterra_http_loadbalancer" "gcp-nginx-lb" {
-  name        = format("gcp-%s-tf", var.SHORTNAME)
-  namespace   = var.NAMESPACE
+  name        = format("gcp-%s-tf", var.shortname)
+  namespace   = var.namespace
   description = "Created by Terraform"
-  domains     = [var.DOMAIN_NAME]
+  domains     = [var.domain_name]
 
   advertise_on_public_default_vip = true
   no_challenge                    = true
@@ -82,7 +82,7 @@ resource "volterra_http_loadbalancer" "gcp-nginx-lb" {
   default_route_pools {
     pool {
       name      = volterra_origin_pool.gcp-origin.name
-      namespace = var.NAMESPACE
+      namespace = var.namespace
     }
     weight = 1
   }
