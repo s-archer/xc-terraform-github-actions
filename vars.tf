@@ -1,11 +1,9 @@
 variable "TENANT" {
   type    = string
-  default = "galileo"
 }
 
 variable "API_P12_PATH" {
   type    = string
-  default = "/p12.fake"
 }
 
 variable "NAMESPACE" {
