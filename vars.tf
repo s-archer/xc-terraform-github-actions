@@ -1,9 +1,9 @@
 variable "TENANT" {
-  type    = string
+  type = string
 }
 
 variable "API_P12_PATH" {
-  type    = string
+  type = string
 }
 
 variable "NAMESPACE" {
