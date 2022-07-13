@@ -11,8 +11,8 @@ jobs:
     name: "Terraform"
     runs-on: ubuntu-latest
     env:
-      TF_API_CERT: ${{ secrets.TF_API_CERT }}
-      TF_API_KEY: ${{ secrets.TF_API_KEY }}
+      TF_api_cert: ${{ secrets.TF_API_CERT }}
+      TF_api_key: ${{ secrets.TF_API_KEY }}
     # environment: production
     steps:
       - name: Checkout
