@@ -85,4 +85,21 @@ resource "volterra_http_loadbalancer" "gcp-nginx-lb" {
     }
     weight = 1
   }
+  
+  app_firewall {
+    name      = volterra_app_firewall.recommended.name
+    namespace = var.volterra_namespace
+  }
+}
+
+resource "volterra_app_firewall" "recommended" {
+  name      = "${var.uk_se_name}-waf-${var.shortname}"
+  namespace = var.volterra_namespace
+
+  allow_all_response_codes = true
+  default_anonymization = true
+  use_default_blocking_page = true
+  default_bot_setting = true
+  default_detection_settings = true
+  use_loadbalancer_setting = true
 }
