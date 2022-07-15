@@ -88,13 +88,13 @@ resource "volterra_http_loadbalancer" "gcp-nginx-lb" {
 
   app_firewall {
     name      = volterra_app_firewall.recommended.name
-    namespace = var.volterra_namespace
+    namespace = var.namespace
   }
 }
 
 resource "volterra_app_firewall" "recommended" {
   name      = format("gcp-%s-waf-tf", var.shortname)
-  namespace = var.volterra_namespace
+  namespace = var.namespace
 
   allow_all_response_codes   = true
   default_anonymization      = true
