@@ -93,7 +93,7 @@ resource "volterra_http_loadbalancer" "gcp-nginx-lb" {
 }
 
 resource "volterra_app_firewall" "recommended" {
-  name      = "${var.uk_se_name}-waf-${var.shortname}"
+  name      = format("gcp-%s-waf-tf", var.shortname)
   namespace = var.volterra_namespace
 
   allow_all_response_codes   = true
