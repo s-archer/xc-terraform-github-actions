@@ -1,4 +1,4 @@
-name: "Terraform"
+name: "Terraform v1.01"
 
 on:
   push:
@@ -20,11 +20,6 @@ jobs:
           terraform_version: 1.2.4
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      # If any objects exist in state, returns true, else false.
-      - name: Terraform State 
-        id: state
-        run: terraform state list | grep . 
-
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
@@ -36,6 +31,11 @@ jobs:
       - name: Terraform Validate
         id: validate
         run: terraform validate
+
+      # If any objects exist in state, returns true, else false.
+      - name: Terraform State 
+        id: state
+        run: terraform state list | grep . 
 
       - name: Terraform Plan
         id: plan
