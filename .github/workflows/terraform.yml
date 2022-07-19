@@ -36,7 +36,7 @@ jobs:
       - name: Terraform State 
         id: state
         run: |
-          terraform state list | grep . 
+          terraform state list | grep -e . 
 
       # - name: Terraform State Status
       #   if: steps.state.outcome == 'failure'
