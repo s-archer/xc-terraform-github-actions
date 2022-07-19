@@ -35,7 +35,7 @@ jobs:
       # If any objects exist in state, returns true, else false.
       - name: Terraform State 
         id: state
-        run: terraform state list | grep . 
+        run: terraform state list 
 
       - name: Terraform State Status
         if: steps.state.outcome == 'failure'
