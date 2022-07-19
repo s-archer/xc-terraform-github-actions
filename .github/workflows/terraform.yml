@@ -37,6 +37,10 @@ jobs:
         id: state
         run: terraform state list | grep . 
 
+      - name: Terraform State Status
+        if: steps.state.outcome == 'failure'
+        run: exit 1
+
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
