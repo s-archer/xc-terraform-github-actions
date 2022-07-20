@@ -2,7 +2,7 @@ name: "Terraform v1.06"
 on:
   push:
     branches:
-      - main
+      - updates
   pull_request:
 
 jobs:
