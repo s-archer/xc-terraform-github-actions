@@ -68,7 +68,6 @@ jobs:
         run: export TF_VAR_timestamp_start=$(date +%s)
 
       - name: Save timestamp_start to pipeline tfvars 
-        id: vars
         run: |-
           cat > pipeline.auto.tfvars <<EOF
           start_timestamp = $(date +%s)
@@ -89,7 +88,6 @@ jobs:
         run: export TF_VAR_timestamp_end=$(date +%s)
 
       - name: Save timestamp_end to pipeline tfvars
-        id: vars
         run: |-
           cat >> pipeline.auto.tfvars <<EOF
           end_timestamp = $(date +%s)
