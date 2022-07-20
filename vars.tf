@@ -26,6 +26,10 @@ variable "origin_site" {
   type = string
 }
 
+variable "origin_fqdn" {
+  type = string
+}
+
 variable "domain_name" {
   type = string
 }

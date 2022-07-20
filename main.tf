@@ -24,35 +24,31 @@ provider "volterra" {
   api_p12_file = var.api_p12_file
 }
 
-
-
-resource "volterra_origin_pool" "gcp-origin" {
-  name                   = format("gcp-%s-tf", var.shortname)
+resource "volterra_origin_pool" "origin" {
+  name                   = format("%s-%s-tf", var.uk_se_name, var.short_name)
   namespace              = var.namespace
-  description            = "Created by Terraform"
-  endpoint_selection     = "LOCAL_PREFERRED"
+  description            = "Terraform created origin pool"
   loadbalancer_algorithm = "LB_OVERRIDE"
 
-  port   = var.origin_port
-  no_tls = true
-
   origin_servers {
-    private_ip {
-      ip              = var.origin_ip
-      outside_network = true
-      site_locator {
-        site {
-          tenant    = null
-          namespace = "system"
-          name      = var.origin_site
-        }
-      }
+    public_name {
+      dns_name = var.origin_fqdn
     }
+  }
+  port               = var.origin_port
+  endpoint_selection = "LOCAL_PREFERRED"
+  use_tls {
+    no_mtls                  = true
+    skip_server_verification = true
+    tls_config {
+      default_security = true
+    }
+    use_host_header_as_sni = true
   }
 }
 
-resource "volterra_http_loadbalancer" "gcp-nginx-lb" {
-  name        = format("gcp-%s-tf", var.shortname)
+resource "volterra_http_loadbalancer" "lb" {
+  name        = format("%s-%s-tf", var.uk_se_name, var.short_name)
   namespace   = var.namespace
   description = "Created by Terraform"
   domains     = [var.domain_name]
@@ -80,7 +76,7 @@ resource "volterra_http_loadbalancer" "gcp-nginx-lb" {
 
   default_route_pools {
     pool {
-      name      = volterra_origin_pool.gcp-origin.name
+      name      = volterra_origin_pool.origin.name
       namespace = var.namespace
     }
     weight = 1
@@ -93,7 +89,7 @@ resource "volterra_http_loadbalancer" "gcp-nginx-lb" {
 }
 
 resource "volterra_app_firewall" "recommended" {
-  name      = format("gcp-%s-waf-tf", var.shortname)
+  name      = format("%s-%s-tf", var.uk_se_name, var.short_name)
   namespace = var.namespace
 
   allow_all_response_codes   = true
