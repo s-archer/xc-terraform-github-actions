@@ -9,6 +9,9 @@ jobs:
   terraform-lb:
     name: "Terraform-lb"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -47,6 +50,9 @@ jobs:
   terraform-waf-rules:
     name: "Terraform WAF Exclusion Rules"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./waf_exclusion_rules
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -56,7 +62,6 @@ jobs:
         with:
           terraform_version: 1.2.4
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }
-          working-directory: 'waf_exclusion_rules'
 
       - name: timstamp_start
         run: export TF_VAR_timestamp_start=$(date +%s)
