@@ -103,14 +103,17 @@ jobs:
         run: terraform apply -auto-approve -input=false 
         working-directory: ./waf_exclusion_rules
       
-      - name: Commit WAF Rules
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit -m "Modified by Github Actions workflow"
-          git push
-        working-directory: ./waf_exclusion_rules
+      - name: Output WAF Rules
+        run: echo ${{ steps.apply2.outputs.stdout }}
+      
+      # - name: Commit WAF Rules
+      #   run: |
+      #     git config user.name github-actions
+      #     git config user.email github-actions@github.com
+      #     git add .
+      #     git commit -m "Modified by Github Actions workflow"
+      #     git push
+      #   working-directory: ./waf_exclusion_rules
 
 
 
