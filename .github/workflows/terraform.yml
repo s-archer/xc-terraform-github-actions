@@ -105,12 +105,12 @@ jobs:
       
       - name: Commit WAF Rules
         run: |
-          date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m "generated"
+          git commit -m "Modified by Github Actions workflow"
           git push
+        working-directory: ./waf_exclusion_rules
 
 
 
