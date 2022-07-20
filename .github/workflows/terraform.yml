@@ -97,6 +97,8 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false 
 
+      # - name: check_for-rules
+      #   run: 
 
 
       # - uses: actions/github-script@v6
