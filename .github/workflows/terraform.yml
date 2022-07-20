@@ -95,7 +95,7 @@ jobs:
 
       - name: Terraform Init
         id: init2
-        run: terraform init
+        run: terraform init -upgrade
         working-directory: ./waf_exclusion_rules
 
       - name: Terraform Validate
