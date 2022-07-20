@@ -62,6 +62,7 @@ jobs:
           --data-raw '{"email":"' or 1=1","password":"bogus"}' \
           --compressed
           sleep 10
+        continue-on-error: true
 
       - name: timstamp_end
         run: export TF_VAR_timestamp_end=$(date +%s)
