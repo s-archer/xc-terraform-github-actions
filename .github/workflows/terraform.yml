@@ -49,7 +49,7 @@ jobs:
         run: terraform apply -auto-approve -input=false 
 
   terraform-waf-rules:
-    name: "Terraform"
+    name: "Terraform-WAF-Rules"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
