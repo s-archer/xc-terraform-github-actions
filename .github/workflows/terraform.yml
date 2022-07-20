@@ -45,7 +45,7 @@ jobs:
         run: terraform apply -auto-approve -input=false 
 
   terraform-waf-rules:
-    name: "Terraform-WAF-Rules"
+    name: "Terraform WAF Exclusion Rules"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -56,7 +56,7 @@ jobs:
         with:
           terraform_version: 1.2.4
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }
-          tf_actions_working_dir: 'waf_exclusion_rules'
+          working-directory: 'waf_exclusion_rules'
 
       - name: timstamp_start
         run: export TF_VAR_timestamp_start=$(date +%s)
