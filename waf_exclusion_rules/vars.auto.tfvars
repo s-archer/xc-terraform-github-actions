@@ -1,4 +1,4 @@
-api_p12_file = "../protected.p12"
+api_p12_file = "protected.p12"
 console_url = "console.ves.volterra.io"
 domain = "juice.gal.volcloud.net"
 #end_timestamp = "1658260800"

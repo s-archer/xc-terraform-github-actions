@@ -7,7 +7,7 @@ on:
 
 jobs:
   terraform-lb:
-    name: "Terraform-lb"
+    name: "Terraform Apply F5 XC Orign, LB & WAF"
     runs-on: ubuntu-latest
 
     steps:
@@ -46,7 +46,7 @@ jobs:
         run: terraform apply -auto-approve -input=false 
 
   terraform-waf-rules:
-    name: "Terraform WAF Exclusion Rules"
+    name: "Run Tests & Terraform Apply WAF Exclusion Rules"
     runs-on: ubuntu-latest
     needs: terraform-lb
 
