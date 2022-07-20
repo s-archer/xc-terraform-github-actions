@@ -60,16 +60,35 @@ resource "volterra_http_loadbalancer" "lb" {
     name      = volterra_app_firewall.recommended.name
     namespace = var.namespace
   }
+  dynamic "waf_exclusion_rules" {
+    for_each = var.waf_exclusion_rules
+    content {  
+      exclude_rule_ids = [ ]
+      metadata {
+        name = "waf-exlusion-rule-${substr(uuid(),0,7)}"
+      }
+      exact_value = waf_exclusion_rules.value.host
+      methods = [ waf_exclusion_rules.value.method ]
+      path_regex = waf_exclusion_rules.value.path
+      app_firewall_detection_control {
+        exclude_signature_contexts {
+          signature_id = waf_exclusion_rules.value.signature_id
+        }
+      }
+    }
+  }
 }
 
 resource "volterra_app_firewall" "recommended" {
   name      = format("%s-tf", var.shortname)
   namespace = var.namespace
 
-  allow_all_response_codes   = true
-  default_anonymization      = true
-  use_default_blocking_page  = true
-  default_bot_setting        = true
+  blocking = true
+
+  allow_all_response_codes = true
+  default_anonymization = true
+  use_default_blocking_page = true
+  default_bot_setting = true
   default_detection_settings = true
-  use_loadbalancer_setting   = true
+  use_loadbalancer_setting = true
 }

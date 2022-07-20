@@ -4,10 +4,6 @@ terraform {
       source  = "volterraedge/volterra"
       version = "0.11.9"
     }
-    # azurerm = {
-    #   source  = "hashicorp/azurerm"
-    #   version = "=2.46.0"
-    # }
     http-full = {
       source = "salrashid123/http-full"
     }
@@ -28,7 +24,7 @@ terraform {
 
 provider "volterra" {
   # Configuration options.
-  url          = format("https://%s.console.ves.volterra.io/api", var.tenant)
+  url          = local.api_url
   api_p12_file = var.api_p12_file
 }
 
