@@ -32,12 +32,12 @@ jobs:
         id: validate
         run: terraform validate
 
-      # If any objects exist in state, returns true, else false.
-      - name: Terraform State 
-        id: state
-        run: |
-          terraform state list | grep 'volterra_http_loadbalancer'
-        continue-on-error: true
+      # If LB object exists in state, returns true, else false.
+      # - name: Terraform State 
+      #   id: state
+      #   run: |
+      #     terraform state list | grep 'volterra_http_loadbalancer'
+      #   continue-on-error: true
 
       - name: Terraform Plan
         id: plan
@@ -81,3 +81,7 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false 
+
+      - name: timstamp_start
+      - name: tests
+      - name: timstamp_end
