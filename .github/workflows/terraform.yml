@@ -50,7 +50,7 @@ jobs:
   terraform-waf-rules:
     name: "Test & Apply WAF Exceptions"
     runs-on: ubuntu-latest
-    needs: terraform-lb
+    # needs: terraform-lb
 
     steps:
       - name: Checkout
