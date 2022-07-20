@@ -9,6 +9,7 @@ jobs:
   terraform-lb:
     name: "Terraform-lb"
     runs-on: ubuntu-latest
+    concurrency: demo-sequential-workflow
 
     steps:
       - name: Checkout
@@ -48,6 +49,7 @@ jobs:
   terraform-waf-rules:
     name: "Terraform WAF Exclusion Rules"
     runs-on: ubuntu-latest
+    concurrency: demo-sequential-workflow
         
     steps:
       - name: Checkout
