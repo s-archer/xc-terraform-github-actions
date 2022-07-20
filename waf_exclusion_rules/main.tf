@@ -11,10 +11,10 @@ terraform {
       source  = "massdriver-cloud/jq"
       version = "0.2.0"
     }
-    gitops = {
-      source = "tyler-technologies/gitops"
-      version = "0.0.2-rc"
-    }
+    # gitops = {
+    #   source = "tyler-technologies/gitops"
+    #   version = "0.0.2-rc"
+    # }
   }
 
   cloud {
@@ -36,12 +36,12 @@ provider "http-full" {}
 
 provider "jq" {}
 
-provider "gitops" {
+# provider "gitops" {
 
-  repo_url = "https://github.com/s-archer/xc-terraform-github-actions.git"
-  branch = "updates"
-  path = "."
-}
+#   repo_url = "https://github.com/s-archer/xc-terraform-github-actions.git"
+#   branch = "updates"
+#   path = "."
+# }
 
 
 
