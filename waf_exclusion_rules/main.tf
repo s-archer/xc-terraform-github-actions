@@ -13,13 +13,13 @@ terraform {
     }
   }
 
-  cloud {
-    organization = "f5ukse"
+  # cloud {
+  #   organization = "f5ukse"
 
-    workspaces {
-      name = "xc-terraform-github-actions-waf-exc-rules"
-    }
-  }
+  #   workspaces {
+  #     name = "xc-terraform-github-actions-waf-exc-rules"
+  #   }
+  # }
 }
 
 provider "volterra" {
