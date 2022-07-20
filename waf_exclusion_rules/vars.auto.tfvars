@@ -1,0 +1,8 @@
+api_p12_file = "../protected.p12"
+tenant       = "galileo"
+namespace    = "arch"
+shortname    = "juice"
+console_url = "console.ves.volterra.io"
+start_timestamp = "1658232000"
+end_timestamp = "1658260800"
+domain = "juice.gal.volcloud.net"
