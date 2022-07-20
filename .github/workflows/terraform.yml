@@ -67,6 +67,13 @@ jobs:
       - name: timstamp_start
         run: export TF_VAR_timestamp_start=$(date +%s)
 
+      - name: Save timestamp_start to pipeline tfvars 
+        id: vars
+        run: |-
+          cat > pipeline.auto.tfvars <<EOF
+          start_timestamp = $(date +%s)
+          EOF
+
       - name: tests
         run: |
           curl 'https://juice.gal.volcloud.net/rest/user/login' \
@@ -81,14 +88,12 @@ jobs:
       - name: timstamp_end
         run: export TF_VAR_timestamp_end=$(date +%s)
 
-      # - name: Setup Terraform variables
-      #   id: vars
-      #   run: |-
-      #     cat > pipeline.auto.tfvars <<EOF
-      #     account_name = "<SENSITIVE>"
-      #     end_timestamp = $something
-      #     start_timestamp = $somethingelse
-      #     EOF
+      - name: Save timestamp_end to pipeline tfvars
+        id: vars
+        run: |-
+          cat >> pipeline.auto.tfvars <<EOF
+          end_timestamp = $(date +%s)
+          EOF
 
       - name: Terraform Init
         id: init2
