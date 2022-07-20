@@ -1,9 +1,10 @@
 api_p12_file = "./protected.p12"
-tenant       = "galileo"
-namespace    = "arch"
-shortname    = "juice"
-origin_port  = 443
-origin_ip    = "10.0.0.3"
-origin_fqdn  = "juiceshop.volt.archf5.com"
-origin_site  = "gcp-test-site"
+console_url = "console.ves.volterra.io"
 domain_name  = "juice.gal.volcloud.net"
+namespace    = "arch"
+origin_fqdn  = "juiceshop.volt.archf5.com"
+origin_ip    = "10.0.0.3"
+origin_port  = 443
+origin_site  = "gcp-test-site"
+shortname    = "juice"
+tenant       = "galileo"

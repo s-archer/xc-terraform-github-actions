@@ -1,3 +1,12 @@
+locals {
+  api_url = format("https://%s.%s/api", var.tenant, var.console_url)
+}
+
+variable "console_url" {
+  type    = string
+  default = ""
+}
+
 variable "tenant" {
   type = string
 }
