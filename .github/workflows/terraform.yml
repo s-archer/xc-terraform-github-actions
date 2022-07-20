@@ -104,8 +104,8 @@ jobs:
         working-directory: ./waf_exclusion_rules
       
       - name: Commit WAF Rules
-        uses: actions/checkout@v3
-        run: |
+      - uses: actions/checkout@v3
+      - run: |
           date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
