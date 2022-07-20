@@ -37,7 +37,10 @@ provider "http-full" {}
 provider "jq" {}
 
 provider "gitops" {
-  # Configuration options
+
+  repo_url = "https://github.com/s-archer/xc-terraform-github-actions.git"
+  branch = "updates"
+  path = "."
 }
 
 
