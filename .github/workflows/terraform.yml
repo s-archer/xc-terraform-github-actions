@@ -81,6 +81,15 @@ jobs:
       - name: timstamp_end
         run: export TF_VAR_timestamp_end=$(date +%s)
 
+      # - name: Setup Terraform variables
+      #   id: vars
+      #   run: |-
+      #     cat > pipeline.auto.tfvars <<EOF
+      #     account_name = "<SENSITIVE>"
+      #     end_timestamp = $something
+      #     start_timestamp = $somethingelse
+      #     EOF
+
       - name: Terraform Init
         id: init2
         run: terraform init
@@ -103,8 +112,15 @@ jobs:
         run: terraform apply -auto-approve -input=false 
         working-directory: ./waf_exclusion_rules
       
-      - name: Output WAF Rules
+      - name: Output WAF Rules stdout
         run: echo ${{ steps.apply2.outputs.stdout }}
+        continue-on-error: true
+      - name: Output WAF Rules stderr
+        run: echo ${{ steps.apply2.outputs.stderr }}
+        continue-on-error: true
+      - name: Output WAF Rules exitcode
+        run: echo ${{ steps.apply2.outputs.exitcode }}
+        continue-on-error: true
       
       # - name: Commit WAF Rules
       #   run: |
