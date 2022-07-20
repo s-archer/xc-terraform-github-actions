@@ -11,6 +11,10 @@ terraform {
       source  = "massdriver-cloud/jq"
       version = "0.2.0"
     }
+    gitops = {
+      source = "tyler-technologies/gitops"
+      version = "0.0.2-rc"
+    }
   }
 
   cloud {
@@ -31,6 +35,12 @@ provider "volterra" {
 provider "http-full" {}
 
 provider "jq" {}
+
+provider "gitops" {
+  # Configuration options
+}
+
+
 
 resource "volterra_api_credential" "api" {
   name                = format("%s-api-token", var.shortname)
