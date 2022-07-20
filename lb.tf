@@ -1,5 +1,5 @@
 resource "volterra_origin_pool" "origin" {
-  name                   = format("%s-tf", var.short_name)
+  name                   = format("%s-tf", var.shortname)
   namespace              = var.namespace
   description            = "Terraform created origin pool"
   loadbalancer_algorithm = "LB_OVERRIDE"
@@ -22,7 +22,7 @@ resource "volterra_origin_pool" "origin" {
 }
 
 resource "volterra_http_loadbalancer" "lb" {
-  name        = format("%s-tf", var.short_name)
+  name        = format("%s-tf", var.shortname)
   namespace   = var.namespace
   description = "Created by Terraform"
   domains     = [var.domain_name]
@@ -63,7 +63,7 @@ resource "volterra_http_loadbalancer" "lb" {
 }
 
 resource "volterra_app_firewall" "recommended" {
-  name      = format("%s-tf", var.short_name)
+  name      = format("%s-tf", var.shortname)
   namespace = var.namespace
 
   allow_all_response_codes   = true
