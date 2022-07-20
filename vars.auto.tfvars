@@ -6,4 +6,4 @@ origin_port  = 443
 origin_ip    = "10.0.0.3"
 origin_fqdn  = "juiceshop.volt.archf5.com"
 origin_site  = "gcp-test-site"
-domain_name  = "gal.volcloud.net"
+domain_name  = "juice.gal.volcloud.net"
