@@ -54,11 +54,11 @@ jobs:
         uses: actions/checkout@v3
         
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.2.4
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }
+      # - name: Setup Terraform
+      #   uses: hashicorp/setup-terraform@v2
+      #   with:
+      #     terraform_version: 1.2.4
+      #     cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }
 
       - name: timstamp_start
         run: export TF_VAR_timestamp_start=$(date +%s)
