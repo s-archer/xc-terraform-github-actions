@@ -1,7 +1,4 @@
-resource "gitops_checkout" "updates_checkout" {
-    path = "./"
-    branch = "updates"
-}
+resource "gitops_checkout" "updates_checkout" {}
 
 resource "gitops_file" "waf_file" {
   checkout = gitops_checkout.updates_checkout.id
