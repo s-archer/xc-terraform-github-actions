@@ -109,18 +109,13 @@ jobs:
       - name: Terraform Apply
         id: apply2
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false 
+        run: terraform apply -auto-approve -no-color -input=false 
         working-directory: ./waf_exclusion_rules
       
       - name: Output WAF Rules stdout
         run: echo ${{ steps.apply2.outputs.stdout }}
         continue-on-error: true
-      - name: Output WAF Rules stderr
-        run: echo ${{ steps.apply2.outputs.stderr }}
-        continue-on-error: true
-      - name: Output WAF Rules exitcode
-        run: echo ${{ steps.apply2.outputs.exitcode }}
-        continue-on-error: true
+
       
       # - name: Commit WAF Rules
       #   run: |
