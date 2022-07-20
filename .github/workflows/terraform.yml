@@ -1,5 +1,4 @@
 name: "Terraform v1.06"
-
 on:
   push:
     branches:
@@ -7,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  terraform:
+  terraform-lb:
     name: "Terraform"
     runs-on: ubuntu-latest
     steps:
@@ -49,9 +48,22 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false 
 
+  terraform-waf-rules:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.2.4
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }
+          tf_actions_working_dir: 'waf_exclusion_rules'
+
       - name: timstamp_start
-        run: |
-          export TF_VAR_timestamp_start=$(date +%s)
+        run: export TF_VAR_timestamp_start=$(date +%s)
 
       - name: tests
         run: |
@@ -66,6 +78,26 @@ jobs:
 
       - name: timstamp_end
         run: export TF_VAR_timestamp_end=$(date +%s)
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        id: plan
+        if: github.event_name == 'pull_request'
+        run: terraform plan -no-color -input=false 
+
+      - name: Terraform Apply
+        id: apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false 
+
+
 
       # - uses: actions/github-script@v6
       #   if: github.event_name == 'pull_request'
