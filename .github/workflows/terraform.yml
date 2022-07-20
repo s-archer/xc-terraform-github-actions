@@ -1,4 +1,4 @@
-name: "Terraform v1.06"
+name: "Terraform v1.09"
 on:
   push:
     branches:
@@ -95,7 +95,7 @@ jobs:
 
       - name: Terraform Init
         id: init2
-        run: terraform init
+        run: terraform init -upgrade
         working-directory: ./waf_exclusion_rules
 
       - name: Terraform Validate
@@ -111,7 +111,7 @@ jobs:
 
       - name: Terraform Apply
         id: apply2
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/updates' && github.event_name == 'push'
         run: terraform apply -auto-approve -no-color -input=false 
         working-directory: ./waf_exclusion_rules
       

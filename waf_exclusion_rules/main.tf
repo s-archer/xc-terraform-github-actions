@@ -11,10 +11,10 @@ terraform {
       source  = "massdriver-cloud/jq"
       version = "0.2.0"
     }
-    gitops = {
-      source = "tyler-technologies/gitops"
-      version = "0.0.2-rc"
-    }
+    # gitops = {
+    #   source = "tyler-technologies/gitops"
+    #   version = "0.0.2-rc" 
+    # }
   }
 
   cloud {
@@ -36,9 +36,12 @@ provider "http-full" {}
 
 provider "jq" {}
 
-provider "gitops" {
-  # Configuration options
-}
+# provider "gitops" {
+
+#   repo_url = "https://github.com/s-archer/xc-terraform-github-actions.git"
+#   branch = "updates"
+#   path = "."
+# }
 
 
 
@@ -84,6 +87,3 @@ resource "local_file" "waf_exclusion_rules_defined_within_interval" {
   filename = "waf_exclusion_rules_defined_within_interval.tf"
 }
 
-output "waf_exclusion_rules_defined_within_interval" {
-  content  = format("variable \"waf_exclusion_rules\" {\n  type = set( object( {\n    signature_id = string\n    method = string\n    host = string\n    path = string\n    params = string\n  } ) )\n  default = %s\n}", data.jq_query.json_parser.result)
-}
