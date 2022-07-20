@@ -7,6 +7,6 @@ resource "gitops_file" "waf_file" {
 }
 
 resource "gitops_commit" "updates_commit" {
-  commit_message = "Created by terraform gitops_commit"
+  commit_message = "Created by terraform gitops_commit "
   handles = [gitops_file.waf_file.id]
 }
