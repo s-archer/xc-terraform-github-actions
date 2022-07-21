@@ -63,8 +63,8 @@ jobs:
         with:
           terraform_version: 1.2.4
           # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-        # env:
-        #   TF_VAR_azure_backend_key: ${{ secrets.AZURE_BACKEND_KEY }}
+        env:
+          VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
 
       - name: timstamp_start
         run: export TF_VAR_timestamp_start=$(date +%s)
