@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 # resource "gitops_checkout" "updates_checkout" {
 #     path = "./"
 #     branch = "updates"
 # }
+=======
+# resource "gitops_checkout" "updates_checkout" {}
+>>>>>>> bfcc160c27a963d2d420cc9940410f43415a22f7
 
 # resource "gitops_file" "waf_file" {
 #   checkout = gitops_checkout.updates_checkout.id
@@ -10,6 +14,10 @@
 # }
 
 # resource "gitops_commit" "updates_commit" {
+<<<<<<< HEAD
 #   commit_message = "Created by terraform gitops_commit"
+=======
+#   commit_message = "Created by terraform gitops_commit "
+>>>>>>> bfcc160c27a963d2d420cc9940410f43415a22f7
 #   handles = [gitops_file.waf_file.id]
 # }

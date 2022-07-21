@@ -13,7 +13,11 @@ terraform {
     }
     # gitops = {
     #   source = "tyler-technologies/gitops"
+<<<<<<< HEAD
     #   version = "0.0.2-rc"
+=======
+    #   version = "0.0.2-rc" 
+>>>>>>> bfcc160c27a963d2d420cc9940410f43415a22f7
     # }
   }
 
@@ -37,7 +41,14 @@ provider "http-full" {}
 provider "jq" {}
 
 # provider "gitops" {
+<<<<<<< HEAD
 #   # Configuration options
+=======
+
+#   repo_url = "https://github.com/s-archer/xc-terraform-github-actions.git"
+#   branch = "updates"
+#   path = "."
+>>>>>>> bfcc160c27a963d2d420cc9940410f43415a22f7
 # }
 
 
@@ -82,4 +93,9 @@ data "jq_query" "json_parser" {
 resource "local_file" "waf_exclusion_rules_defined_within_interval" {
   content  = format("variable \"waf_exclusion_rules\" {\n  type = set( object( {\n    signature_id = string\n    method = string\n    host = string\n    path = string\n } ) )\n  default = %s\n}", data.jq_query.json_parser.result)
   filename = "waf_exclusion_rules_defined_within_interval.tf"
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> bfcc160c27a963d2d420cc9940410f43415a22f7
