@@ -37,12 +37,14 @@ jobs:
 
       - name: tests
         run: |
+          sleep 5
           curl 'https://juice.gal.volcloud.net/rest/user/login' \
           -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36' \
           -H 'content-type: application/json; charset=UTF-8' \
           -H 'x-requested-with: XMLHttpRequest' \
           --data-raw '{"email":"' or 1=1","password":"bogus"}' \
           --compressed
+          sleep 5
         continue-on-error: true
 
       - name: timstamp_end
