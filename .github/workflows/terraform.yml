@@ -28,6 +28,7 @@ jobs:
         run: |
           # export TIMESTAMP_START=$(date +%s)
           # echo "::set-env name=TIMESTAMP_START::$TIMESTAMP_START"
+          echo "timestamp_start=$(date +%s)" >> $GITHUB_ENV
 
 
       # - name: Save timestamp_start to pipeline tfvars 
@@ -93,30 +94,9 @@ jobs:
           TF_VAR_timestamp_end: $TIMESTAMP_END
         # working-directory: ./waf_exclusion_rules
       
-      - name: Output WAF Rules stdout
-        run: echo ${{ steps.apply2.outputs.stdout }}
-        continue-on-error: true
-
-      
-      # - name: Commit WAF Rules
-      #   run: |
-      #     git config user.name github-actions
-      #     git config user.email github-actions@github.com
-      #     git add .
-      #     git commit -m "Modified by Github Actions workflow"
-      #     git push
-      #   working-directory: ./waf_exclusion_rules
-
-
-
-
-
-
-
-
-      # - name: check_for-rules
-      #   run: 
-
+      # - name: Output WAF Rules stdout
+      #   run: echo ${{ steps.apply2.outputs.stdout }}
+      #   continue-on-error: true
 
       # - uses: actions/github-script@v6
       #   if: github.event_name == 'pull_request'
