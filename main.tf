@@ -13,12 +13,20 @@ terraform {
     }
   }
 
-  cloud {
-    organization = "f5ukse"
+  # cloud {
+  #   organization = "f5ukse"
 
-    workspaces {
-      name = "xc-terraform-github-actions"
-    }
+  #   workspaces {
+  #     name = "  "
+  #   }
+  # }
+
+  backend "azurerm" {
+    resource_group_name  = "arch-storage-rg" 
+    storage_account_name = "xcerraformgithubactions"
+    container_name       = "terraform"
+    key                  = "terraform.tfstat"
+    access_key           = var.azure_backend_key
   }
 }
 

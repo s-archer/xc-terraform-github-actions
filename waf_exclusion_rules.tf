@@ -1,46 +1,3 @@
-terraform {
-  required_providers {
-    volterra = {
-      source  = "volterraedge/volterra"
-      version = "0.11.9"
-    }
-    http-full = {
-      source = "salrashid123/http-full"
-    }
-    jq = {
-      source  = "massdriver-cloud/jq"
-      version = "0.2.0"
-    }
-    # gitops = {
-    #   source = "tyler-technologies/gitops"
-    #   version = "0.0.2-rc"
-    # }
-  }
-
-  # cloud {
-  #   organization = "f5ukse"
-
-  #   workspaces {
-  #     name = "xc-terraform-github-actions-waf-exc-rules"
-  #   }
-  # }
-}
-
-provider "volterra" {
-  # Configuration options.
-  url          = local.api_url
-  api_p12_file = var.api_p12_file
-}
-
-provider "http-full" {}
-
-provider "jq" {}
-
-# provider "gitops" {
-#   # Configuration options
-# }
-
-
 
 resource "volterra_api_credential" "api" {
   name                = format("%s-api-token", var.shortname)
@@ -79,7 +36,12 @@ data "jq_query" "json_parser" {
   query = "[.events[] | fromjson | select( .signatures != {} ) | { signature_id: .signatures[].id, method: .method, path: .req_path, host: .authority } ] | unique"
 }
 
+# resource "local_file" "waf_exclusion_rules_defined_within_interval" {
+#   content  = format("variable \"waf_exclusion_rules\" {\n  type = set( object( {\n    signature_id = string\n    method = string\n    host = string\n    path = string\n } ) )\n  default = %s\n}", data.jq_query.json_parser.result)
+#   filename = "waf_exclusion_rules_defined_within_interval.tf"
+# }
+
 resource "local_file" "waf_exclusion_rules_defined_within_interval" {
-  content  = format("variable \"waf_exclusion_rules\" {\n  type = set( object( {\n    signature_id = string\n    method = string\n    host = string\n    path = string\n } ) )\n  default = %s\n}", data.jq_query.json_parser.result)
-  filename = "waf_exclusion_rules_defined_within_interval.tf"
+  content  = format("waf_exclusion_rules = %s", data.jq_query.json_parser.result)
+  filename = "vars.excl-rules.auto.tfvars"
 }

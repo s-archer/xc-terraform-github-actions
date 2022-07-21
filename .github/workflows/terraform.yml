@@ -56,22 +56,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: updates        
+          ref: main        
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.2.4
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+        env:
+          TF_VAR_azure_backend_key: ${{ secrets.AZURE_BACKEND_KEY }}
 
       - name: timstamp_start
-        run: export TF_VAR_timestamp_start=$(date +%s)
+        # run: export TF_VAR_timestamp_start=$(date +%s)
+        env:
+          TF_VAR_timestamp_start: $(date +%s)
 
-      - name: Save timestamp_start to pipeline tfvars 
-        run: |-
-          cat > pipeline.auto.tfvars <<EOF
-          start_timestamp = $(date +%s)
-          EOF
+      # - name: Save timestamp_start to pipeline tfvars 
+      #   run: |-
+      #     cat > pipeline.auto.tfvars <<EOF
+      #     start_timestamp = $(date +%s)
+      #     EOF
 
       - name: tests
         run: |
@@ -81,17 +85,18 @@ jobs:
           -H 'x-requested-with: XMLHttpRequest' \
           --data-raw '{"email":"' or 1=1","password":"bogus"}' \
           --compressed
-          sleep 10
         continue-on-error: true
 
       - name: timstamp_end
-        run: export TF_VAR_timestamp_end=$(date +%s)
+        # run: export TF_VAR_timestamp_end=$(date +%s)
+        env:
+          TF_VAR_timestamp_end: $(date +%s)
 
-      - name: Save timestamp_end to pipeline tfvars
-        run: |-
-          cat >> pipeline.auto.tfvars <<EOF
-          end_timestamp = $(date +%s)
-          EOF
+      # - name: Save timestamp_end to pipeline tfvars
+      #   run: |-
+      #     cat >> pipeline.auto.tfvars <<EOF
+      #     end_timestamp = $(date +%s)
+      #     EOF
 
       - name: Terraform Init
         id: init2

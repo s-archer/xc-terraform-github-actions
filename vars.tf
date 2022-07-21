@@ -1,5 +1,16 @@
 locals {
   api_url = format("https://%s.%s/api", var.tenant, var.console_url)
+  api_get_security_events_url = format("https://%s.%s/api/data/namespaces/%s/app_security/events", var.tenant, var.console_url, var.namespace)
+}
+
+variable "waf_exclusion_rules" {
+  type = set( object( {
+    signature_id = string
+    method = string
+    host = string
+    path = string
+ } ) )
+  default = []
 }
 
 variable "console_url" {
@@ -12,6 +23,10 @@ variable "tenant" {
 }
 
 variable "api_p12_file" {
+  type = string
+}
+
+variable "azure_backend_key" {
   type = string
 }
 
@@ -39,6 +54,16 @@ variable "origin_fqdn" {
   type = string
 }
 
-variable "domain_name" {
+variable "domain" {
   type = string
+}
+
+variable "start_timestamp" {
+  type    = string
+  default = ""
+}
+
+variable "end_timestamp" {
+  type    = string
+  default = ""
 }
