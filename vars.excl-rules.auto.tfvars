@@ -1,0 +1,1 @@
+waf_exclusion_rules = [{"host":"juice.gal.volcloud.net","method":"GET","path":"/rest/products/1/reviews","signature_id":"200002053"},{"host":"juice.gal.volcloud.net","method":"GET","path":"/rest/user/whoami","signature_id":"200002053"}]
