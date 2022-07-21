@@ -63,8 +63,8 @@ jobs:
         with:
           terraform_version: 1.2.4
           # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-        env:
-          TF_VAR_azure_backend_key: ${{ secrets.AZURE_BACKEND_KEY }}
+        # env:
+        #   TF_VAR_azure_backend_key: ${{ secrets.AZURE_BACKEND_KEY }}
 
       - name: timstamp_start
         run: export TF_VAR_timestamp_start=$(date +%s)
@@ -100,8 +100,13 @@ jobs:
 
       - name: Terraform Init
         id: init2
-        run: terraform init
+        run: |
+          terraform init \
+          -backend-config="access_key=${{ secrets.AZURE_BACKEND_KEY }}"
+
+
         # working-directory: ./waf_exclusion_rules
+  
 
       - name: Terraform Validate
         id: validate2

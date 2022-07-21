@@ -26,7 +26,7 @@ terraform {
     storage_account_name = "xcerraformgithubactions"
     container_name       = "terraform"
     key                  = "terraform.tfstat"
-    access_key           = var.azure_backend_key
+    # access_key           = var.azure_backend_key
   }
 }
 
