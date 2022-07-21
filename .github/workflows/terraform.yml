@@ -63,8 +63,6 @@ jobs:
         with:
           terraform_version: 1.2.4
           # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-        env:
-          VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
 
       - name: timstamp_start
         run: export TF_VAR_timestamp_start=$(date +%s)
@@ -116,13 +114,17 @@ jobs:
       - name: Terraform Plan
         id: plan2
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false 
+        run: terraform plan -no-color -input=false
+        env:
+          VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }} 
         # working-directory: ./waf_exclusion_rules
 
       - name: Terraform Apply
         id: apply2
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -no-color -input=false 
+        env:
+          VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
         # working-directory: ./waf_exclusion_rules
       
       - name: Output WAF Rules stdout
