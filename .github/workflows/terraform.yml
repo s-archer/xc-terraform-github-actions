@@ -6,47 +6,7 @@ on:
   pull_request:
 
 jobs:
-  # terraform-lb:
-  #   name: "TF Apply LB & WAF"
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-
-  #     - name: Setup Terraform
-  #       uses: hashicorp/setup-terraform@v2
-  #       with:
-  #         terraform_version: 1.2.4
-  #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-
-  #     - name: Terraform Init
-  #       id: init
-  #       run: terraform init
-
-  #     - name: Terraform Validate
-  #       id: validate
-  #       run: terraform validate
-
-  #     # If LB object exists in state, returns true, else false.
-  #     # - name: Terraform State 
-  #     #   id: state
-  #     #   run: |
-  #     #     terraform state list | grep 'volterra_http_loadbalancer'
-  #     #   continue-on-error: true
-
-  #     - name: Terraform Plan
-  #       id: plan
-  #       if: github.event_name == 'pull_request'
-  #       run: terraform plan -no-color -input=false 
-
-  #     - name: Terraform Apply
-  #       id: apply
-  #       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-  #       run: terraform apply -auto-approve -input=false 
-
-
-
+ 
   terraform-waf-rules:
     name: "Test & Apply WAF Exceptions"
     runs-on: ubuntu-latest
@@ -66,8 +26,9 @@ jobs:
 
       - name: timstamp_start
         run: |
-          export TIMESTAMP_START=$(date +%s)
-          echo "::set-env name=TIMESTAMP_START::$TIMESTAMP_START"
+          # export TIMESTAMP_START=$(date +%s)
+          # echo "::set-env name=TIMESTAMP_START::$TIMESTAMP_START"
+
 
       # - name: Save timestamp_start to pipeline tfvars 
       #   run: |-
@@ -87,8 +48,9 @@ jobs:
 
       - name: timstamp_end
         run: |  
-          export TIMESTAMP_END=$(date +%s)
-          echo "::set-env name=TIMESTAMP_END::$TIMESTAMP_END"
+          # export TIMESTAMP_END=$(date +%s)
+          # echo "::set-env name=TIMESTAMP_END::$TIMESTAMP_END"
+          echo "TIMESTAMP_END=$(date +%s)" >> $GITHUB_ENV
 
       # - name: Save timestamp_end to pipeline tfvars
       #   run: |-
@@ -117,8 +79,8 @@ jobs:
         run: terraform plan -no-color -input=false
         env:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }} 
-          TF_VAR_timestamp_start: $TIMESTAMP_START
-          TF_VAR_timestamp_end: $TIMESTAMP_END
+          TF_VAR_timestamp_start: ${{ env.TIMESTAMP_START }}
+          TF_VAR_timestamp_end: ${{ env.TIMESTAMP_END }}
         # working-directory: ./waf_exclusion_rules
 
       - name: Terraform Apply
