@@ -65,9 +65,9 @@ jobs:
           # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: timstamp_start
-        run: export TF_VAR_timestamp_start=$(date +%s)
-        env:
-          TF_VAR_timestamp_start: $(date +%s)
+        run: |
+          export TIMESTAMP_START=$(date +%s)
+          echo "::set-env name=TIMESTAMP_START::$TIMESTAMP_START"
 
       # - name: Save timestamp_start to pipeline tfvars 
       #   run: |-
@@ -86,9 +86,8 @@ jobs:
         continue-on-error: true
 
       - name: timstamp_end
-        run: export TF_VAR_timestamp_end=$(date +%s)
-        env:
-          TF_VAR_timestamp_end: $(date +%s)
+          export TIMESTAMP_END=$(date +%s)
+          echo "::set-env name=TIMESTAMP_END::$TIMESTAMP_END"
 
       # - name: Save timestamp_end to pipeline tfvars
       #   run: |-
@@ -117,6 +116,8 @@ jobs:
         run: terraform plan -no-color -input=false
         env:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }} 
+          TF_VAR_timestamp_start: $TIMESTAMP_START
+          TF_VAR_timestamp_end: $TIMESTAMP_END
         # working-directory: ./waf_exclusion_rules
 
       - name: Terraform Apply
@@ -125,6 +126,8 @@ jobs:
         run: terraform apply -auto-approve -no-color -input=false 
         env:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
+          TF_VAR_timestamp_start: $TIMESTAMP_START
+          TF_VAR_timestamp_end: $TIMESTAMP_END
         # working-directory: ./waf_exclusion_rules
       
       - name: Output WAF Rules stdout
