@@ -26,10 +26,6 @@ variable "api_p12_file" {
   type = string
 }
 
-variable "azure_backend_key" {
-  type = string
-}
-
 variable "namespace" {
   type = string
 }
