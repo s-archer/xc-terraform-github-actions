@@ -86,6 +86,7 @@ jobs:
         continue-on-error: true
 
       - name: timstamp_end
+        run: |  
           export TIMESTAMP_END=$(date +%s)
           echo "::set-env name=TIMESTAMP_END::$TIMESTAMP_END"
 
