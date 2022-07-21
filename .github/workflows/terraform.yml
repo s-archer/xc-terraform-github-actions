@@ -67,7 +67,7 @@ jobs:
           TF_VAR_azure_backend_key: ${{ secrets.AZURE_BACKEND_KEY }}
 
       - name: timstamp_start
-        # run: export TF_VAR_timestamp_start=$(date +%s)
+        run: export TF_VAR_timestamp_start=$(date +%s)
         env:
           TF_VAR_timestamp_start: $(date +%s)
 
@@ -88,7 +88,7 @@ jobs:
         continue-on-error: true
 
       - name: timstamp_end
-        # run: export TF_VAR_timestamp_end=$(date +%s)
+        run: export TF_VAR_timestamp_end=$(date +%s)
         env:
           TF_VAR_timestamp_end: $(date +%s)
 
