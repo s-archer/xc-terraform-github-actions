@@ -87,7 +87,15 @@ jobs:
         env:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
         # working-directory: ./waf_exclusion_rules
-      
+      - name: stage changed files
+        run: git add .
+      - name: commit changed files
+        run: git commit -m "Auto updating after TF Apply.txt"
+      - name: push code to master
+        run: git push origin HEAD:master
+
+
+
       # - name: Output WAF Rules stdout
       #   run: echo ${{ steps.apply2.outputs.stdout }}
       #   continue-on-error: true
