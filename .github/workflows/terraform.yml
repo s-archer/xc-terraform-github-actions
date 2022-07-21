@@ -95,7 +95,7 @@ jobs:
       - name: commit changed files
         run: git commit -m "Auto updating after TF Apply.txt"
       - name: push code to master
-        run: git push origin HEAD:master
+        run: git push origin HEAD:main
 
 
 
