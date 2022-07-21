@@ -101,24 +101,24 @@ jobs:
       - name: Terraform Init
         id: init2
         run: terraform init
-        working-directory: ./waf_exclusion_rules
+        # working-directory: ./waf_exclusion_rules
 
       - name: Terraform Validate
         id: validate2
         run: terraform validate
-        working-directory: ./waf_exclusion_rules
+        # working-directory: ./waf_exclusion_rules
 
       - name: Terraform Plan
         id: plan2
         if: github.event_name == 'pull_request'
         run: terraform plan -no-color -input=false 
-        working-directory: ./waf_exclusion_rules
+        # working-directory: ./waf_exclusion_rules
 
       - name: Terraform Apply
         id: apply2
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -no-color -input=false 
-        working-directory: ./waf_exclusion_rules
+        # working-directory: ./waf_exclusion_rules
       
       - name: Output WAF Rules stdout
         run: echo ${{ steps.apply2.outputs.stdout }}
