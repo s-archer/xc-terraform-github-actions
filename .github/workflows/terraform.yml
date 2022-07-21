@@ -26,9 +26,7 @@ jobs:
 
       - name: timstamp_start
         run: |
-          # export TIMESTAMP_START=$(date +%s)
-          # echo "::set-env name=TIMESTAMP_START::$TIMESTAMP_START"
-          echo "timestamp_start=$(date +%s)" >> $GITHUB_ENV
+          echo "TF_VAR_timestamp_start=$(date +%s)" >> $GITHUB_ENV
 
 
       # - name: Save timestamp_start to pipeline tfvars 
@@ -49,9 +47,7 @@ jobs:
 
       - name: timstamp_end
         run: |  
-          # export TIMESTAMP_END=$(date +%s)
-          # echo "::set-env name=TIMESTAMP_END::$TIMESTAMP_END"
-          echo "TIMESTAMP_END=$(date +%s)" >> $GITHUB_ENV
+          echo "TF_VAR_timestamp_end=$(date +%s)" >> $GITHUB_ENV
 
       # - name: Save timestamp_end to pipeline tfvars
       #   run: |-
@@ -80,8 +76,6 @@ jobs:
         run: terraform plan -no-color -input=false
         env:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }} 
-          TF_VAR_timestamp_start: ${{ env.TIMESTAMP_START }}
-          TF_VAR_timestamp_end: ${{ env.TIMESTAMP_END }}
         # working-directory: ./waf_exclusion_rules
 
       - name: Terraform Apply
@@ -90,8 +84,6 @@ jobs:
         run: terraform apply -auto-approve -no-color -input=false 
         env:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
-          TF_VAR_timestamp_start: $TIMESTAMP_START
-          TF_VAR_timestamp_end: $TIMESTAMP_END
         # working-directory: ./waf_exclusion_rules
       
       # - name: Output WAF Rules stdout
