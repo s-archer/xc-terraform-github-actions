@@ -1,1 +1,1 @@
-waf_exclusion_rules = null
+waf_exclusion_rules = []
