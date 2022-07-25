@@ -93,6 +93,7 @@ jobs:
         run: terraform apply -target="waf_exclusion_rules.tf" -auto-approve -no-color -input=false 
         env:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
+          TF_LOG: debug
         # working-directory: ./waf_exclusion_rules
 
       - name: Terraform Apply
@@ -101,6 +102,7 @@ jobs:
         run: terraform apply -target="lb_origin_waf.tf" -auto-approve -no-color -input=false 
         env:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
+          TF_LOG: debug
         # working-directory: ./waf_exclusion_rules        
 
       - name: stage changed files
@@ -108,8 +110,10 @@ jobs:
           git config --global user.email "github@github.com"
           git config --global user.name "Github Actions"
           git add .
+
       - name: commit changed files
         run: git commit -m "Auto updating after TF Apply.txt" --allow-empty
+
       - name: push code to master
         run: git push origin HEAD:main
 
