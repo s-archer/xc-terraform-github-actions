@@ -37,7 +37,7 @@ data "jq_query" "json_parser" {
 }
 
 output "jquery" {
-  default = data.jq_query.json_parser.result
+  value = data.jq_query.json_parser.result
 }
 
 # resource "local_file" "waf_exclusion_rules_defined_within_interval" {
