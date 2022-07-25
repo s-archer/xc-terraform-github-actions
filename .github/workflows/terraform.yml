@@ -1,4 +1,4 @@
-name: "Terraform v1.11"
+name: "Terraform v1.12"
 on:
   push:
     branches:
@@ -107,7 +107,7 @@ jobs:
         run: git commit -m "Auto updating after TF Apply.txt"
       - name: push code to master
         run: git push origin HEAD:main
-        
+
       # Now apply rules to LB
       - name: Terraform Validate
         id: validate2
