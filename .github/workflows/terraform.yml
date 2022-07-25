@@ -24,7 +24,7 @@ jobs:
           terraform_version: 1.2.4
           # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      - name: timestamp_start
+      - name: Timestamp Start
         run: |
           echo "TF_VAR_timestamp_start=$(date +%s)" >> $GITHUB_ENV
 
@@ -58,7 +58,7 @@ jobs:
           sleep 5
         continue-on-error: true
 
-      - name: timstamp_end
+      - name: Timestamp End
         run: |  
           echo "TF_VAR_timestamp_end=$(date +%s)" >> $GITHUB_ENV
 
