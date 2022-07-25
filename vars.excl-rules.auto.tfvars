@@ -1,1 +1,1 @@
-waf_exclusion_rules = [{"host":"juice.gal.volterra.link","method":"GET","path":"/rest/products/1/reviews","signature_id":"200002053"}]
+waf_exclusion_rules = []
