@@ -26,7 +26,7 @@ data "http" "volterra_get_blocked_by_waf" {
     Content-Type  = "application/json"
     Authorization = format("APIToken %s", volterra_api_credential.api.data)
   }
-  request_body = jsonencode({ aggs : {}, end_time : var.end_timestamp, limit : 0, namespace : var.namespace, query : "{calculated_action=\"block\", authority=\"${var.domain}\",sec_event_type=\"waf_sec_event\"}", scroll : false, sort : "DESCENDING", start_time : var.start_timestamp })
+  request_body = jsonencode({ aggs : {}, end_time : var.timestamp_end, limit : 0, namespace : var.namespace, query : "{calculated_action=\"block\", authority=\"${var.domain}\",sec_event_type=\"waf_sec_event\"}", scroll : false, sort : "DESCENDING", start_time : var.timestamp_start })
 }
 
 data "jq_query" "json_parser" {

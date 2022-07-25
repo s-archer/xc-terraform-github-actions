@@ -55,12 +55,12 @@ variable "domain" {
   type = string
 }
 
-variable "start_timestamp" {
+variable "timestamp_start" {
   type    = string
   default = ""
 }
 
-variable "end_timestamp" {
+variable "timestamp_end" {
   type    = string
   default = ""
 }
