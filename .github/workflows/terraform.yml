@@ -100,14 +100,14 @@ jobs:
           # TF_LOG: debug
         # working-directory: ./waf_exclusion_rules
 
-      - name: Terraform Apply
-        id: apply2
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -no-color -input=false 
-        env:
-          VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
-          # TF_LOG: debug
-        # working-directory: ./waf_exclusion_rules        
+      # - name: Terraform Apply
+      #   id: apply2
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   run: terraform apply -auto-approve -no-color -input=false 
+      #   env:
+      #     VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
+      #     # TF_LOG: debug
+      #   # working-directory: ./waf_exclusion_rules        
 
       - name: stage changed files
         run: |
