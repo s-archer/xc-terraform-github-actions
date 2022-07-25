@@ -11,23 +11,7 @@ terraform {
       source  = "massdriver-cloud/jq"
       version = "0.2.0"
     }
-    # gitops = {
-    #   source = "tyler-technologies/gitops"
-<<<<<<< HEAD
-    #   version = "0.0.2-rc"
-=======
-    #   version = "0.0.2-rc" 
->>>>>>> bfcc160c27a963d2d420cc9940410f43415a22f7
-    # }
   }
-
-  # cloud {
-  #   organization = "f5ukse"
-
-  #   workspaces {
-  #     name = "xc-terraform-github-actions-waf-exc-rules"
-  #   }
-  # }
 }
 
 provider "volterra" {
@@ -39,18 +23,6 @@ provider "volterra" {
 provider "http-full" {}
 
 provider "jq" {}
-
-# provider "gitops" {
-<<<<<<< HEAD
-#   # Configuration options
-=======
-
-#   repo_url = "https://github.com/s-archer/xc-terraform-github-actions.git"
-#   branch = "updates"
-#   path = "."
->>>>>>> bfcc160c27a963d2d420cc9940410f43415a22f7
-# }
-
 
 
 resource "volterra_api_credential" "api" {

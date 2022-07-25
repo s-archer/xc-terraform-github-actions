@@ -1,6 +1,6 @@
 api_p12_file = "protected.p12"
 console_url = "console.ves.volterra.io"
-domain = "juice.gal.volcloud.net"
+domain = "juice.gal.volterra.link"
 namespace    = "arch"
 shortname    = "juice"
 tenant       = "galileo"
