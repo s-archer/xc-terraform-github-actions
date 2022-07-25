@@ -68,6 +68,10 @@ jobs:
       #     end_timestamp = $(date +%s)
       #     EOF
 
+      - name: Wait for events into DB
+        run: |  
+          sleep 30
+        
       - name: Terraform Init
         id: init1
         run: |
