@@ -63,7 +63,8 @@ resource "volterra_http_loadbalancer" "lb" {
   }
 
   dynamic "waf_exclusion_rules" {
-    for_each = var.waf_exclusion_rules
+    # for_each = var.waf_exclusion_rules
+    for_each = format("waf_exclusion_rules = %s", data.jq_query.json_parser.result != "null" ? data.jq_query.json_parser.result : "[]")
     content {
       exclude_rule_ids = []
       metadata {
