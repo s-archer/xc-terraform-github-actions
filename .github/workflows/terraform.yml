@@ -90,7 +90,7 @@ jobs:
       - name: Terraform Apply
         id: apply1
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -target="waf_exclusion_rules.tf" -auto-approve -no-color -input=false 
+        run: terraform apply -auto-approve -no-color -input=false 
         env:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
           # TF_LOG: debug
@@ -99,7 +99,7 @@ jobs:
       - name: Terraform Apply
         id: apply2
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -target="lb_origin_waf.tf" -auto-approve -no-color -input=false 
+        run: terraform apply -auto-approve -no-color -input=false 
         env:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
           # TF_LOG: debug
