@@ -104,7 +104,7 @@ jobs:
           git config --global user.name "Github Actions"
           git add .
       - name: commit changed files
-        run: git commit -m "Auto updating after TF Apply.txt"
+        run: git commit -m "Auto updating after TF Apply.txt" --allow-empty
       - name: push code to master
         run: git push origin HEAD:main
 
