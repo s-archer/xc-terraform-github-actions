@@ -69,7 +69,7 @@ jobs:
       #     EOF
 
       - name: Terraform Init
-        id: init2
+        id: init1
         run: |
           terraform init \
           -backend-config="access_key=${{ secrets.AZURE_BACKEND_KEY }}"
@@ -79,12 +79,12 @@ jobs:
   
 
       - name: Terraform Validate
-        id: validate2
+        id: validate1
         run: terraform validate
         # working-directory: ./waf_exclusion_rules
 
       - name: Terraform Plan
-        id: plan2
+        id: plan1
         if: github.event_name == 'pull_request'
         run: terraform plan -no-color -input=false
         env:
@@ -92,7 +92,7 @@ jobs:
         # working-directory: ./waf_exclusion_rules
 
       - name: Terraform Apply
-        id: apply2
+        id: apply1
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -no-color -input=false 
         env:
@@ -107,6 +107,8 @@ jobs:
         run: git commit -m "Auto updating after TF Apply.txt"
       - name: push code to master
         run: git push origin HEAD:main
+
+
 
       # Now apply rules to LB
       - name: Terraform Validate
