@@ -1,4 +1,4 @@
-name: "Terraform v1.13"
+name: "Terraform v1.14"
 on:
   push:
     branches:
