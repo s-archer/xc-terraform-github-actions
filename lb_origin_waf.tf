@@ -82,7 +82,7 @@ resource "volterra_http_loadbalancer" "lb" {
   }
 
   dynamic "waf_exclusion_rules" {
-    for_each = var.mandatory_waf_exclusion_rules
+    for_each = var.waf_exclusion_rules_mandatory
     content {
       exclude_rule_ids = []
       metadata {
