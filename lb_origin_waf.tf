@@ -26,7 +26,7 @@ resource "volterra_http_loadbalancer" "lb" {
   namespace   = var.namespace
   description = "Created by Terraform"
   domains     = [var.domain]
-  depends_on = [local_file.waf_exclusion_rules_defined_within_interval]
+  depends_on  = [local_file.waf_exclusion_rules_defined_within_interval]
 
   advertise_on_public_default_vip = true
   no_challenge                    = true

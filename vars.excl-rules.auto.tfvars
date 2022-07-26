@@ -1,1 +1,1 @@
-waf_exclusion_rules = [{"host":"juice.gal.volterra.link","method":"GET","path":"/rest/etc/passwd","signature_id":"200010468"}]
+waf_exclusion_rules = [{ "host" : "juice.gal.volterra.link", "method" : "GET", "path" : "/rest/etc/passwd", "signature_id" : "200010468" }]

@@ -1,9 +1,9 @@
 variable "waf_exclusion_rules_mandatory" {
-  type = set( object( {
+  type = set(object({
     signature_id = string
-    method = string
-    host = string
-    path = string
-  } ) )
+    method       = string
+    host         = string
+    path         = string
+  }))
   default = []
 }

@@ -1,16 +1,16 @@
 locals {
-  
-  api_url = format("https://%s.%s/api", var.tenant, var.console_url)
+
+  api_url                     = format("https://%s.%s/api", var.tenant, var.console_url)
   api_get_security_events_url = format("https://%s.%s/api/data/namespaces/%s/app_security/events", var.tenant, var.console_url, var.namespace)
 }
 
 variable "waf_exclusion_rules" {
-  type = set( object( {
+  type = set(object({
     signature_id = string
-    method = string
-    host = string
-    path = string
- } ) )
+    method       = string
+    host         = string
+    path         = string
+  }))
   default = []
 }
 

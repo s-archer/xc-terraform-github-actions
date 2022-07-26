@@ -14,7 +14,7 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "arch-storage-rg" 
+    resource_group_name  = "arch-storage-rg"
     storage_account_name = "xcerraformgithubactions"
     container_name       = "terraform"
     key                  = "terraform.tfstat"
