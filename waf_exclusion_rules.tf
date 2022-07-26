@@ -36,19 +36,6 @@ data "jq_query" "json_parser" {
   query = "[.events[] | fromjson | select( .signatures != {} ) | { signature_id: .signatures[].id, method: .method, path: .req_path, host: .authority } ] | unique"
 }
 
-output "jquery" {
-  value = data.jq_query.json_parser.result
-}
-
-output "timestamps" {
-  value = format("timestamp_start: %s, timestamp_end: %s, request body:%s, response body:%s ", var.timestamp_start, var.timestamp_end, data.http.volterra_get_blocked_by_waf.request_body, data.http.volterra_get_blocked_by_waf.body)
-}
-
-# resource "local_file" "waf_exclusion_rules_defined_within_interval" {
-#   content  = format("variable \"waf_exclusion_rules\" {\n  type = set( object( {\n    signature_id = string\n    method = string\n    host = string\n    path = string\n } ) )\n  default = %s\n}", data.jq_query.json_parser.result)
-#   filename = "waf_exclusion_rules_defined_within_interval.tf"
-# }
-
 resource "local_file" "waf_exclusion_rules_defined_within_interval" {
   content  = format("waf_exclusion_rules = %s", data.jq_query.json_parser.result != "null" ? data.jq_query.json_parser.result : "[]")
   filename = "vars.excl-rules.auto.tfvars"
