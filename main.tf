@@ -18,12 +18,10 @@ terraform {
     storage_account_name = "xcerraformgithubactions"
     container_name       = "terraform"
     key                  = "terraform.tfstat"
-    # access_key           = var.azure_backend_key
   }
 }
 
 provider "volterra" {
-  # Configuration options.
   url          = local.api_url
   api_p12_file = var.api_p12_file
 }
