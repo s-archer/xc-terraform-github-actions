@@ -2,7 +2,7 @@
 
 ![alt text for screen readers](/images/xc-to-public-ip.png "Logical diagram of F5 Distributed Cloud test scenario")
 
-See https://f5.com/cloud for product details
+See https://f5.com/cloud for product details and https://registry.terraform.io/providers/volterraedge/volterra/latest/docs for Terraform provider useage.
 
 This project provides an example CI/CD pipeline WAF (Web Application Firewall) deployment and automatic policy tuning within a closed test environment using F5 Distributed Cloud.  
 
