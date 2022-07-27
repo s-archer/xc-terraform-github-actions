@@ -1,6 +1,8 @@
 # F5 Distributed Cloud Terraform Github Actions
 
-see https://f5.com/cloud for product details
+![alt text for screen readers](/images/xc-to-public-ip.png "Logical diagram of F5 Distributed Cloud test scenario")
+
+See https://f5.com/cloud for product details
 
 The concept for this project is to show how a WAF policy can be automatically refined within a closed test environment using F5 Distributed Cloud.  
 
