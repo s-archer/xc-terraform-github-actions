@@ -31,7 +31,7 @@ Alternate workflow:
     - create a LB & WAF on F5 Distributed Cloud Regional Edges, with an Origin pointing at another public site.
 
 - before second run:
-    - comment out one of the curl tests in ./.github/workflows/terraform.yml
+    - comment out one of the curl tests in `./.github/workflows/terraform.yml`
 
 - during second run:
     - record start timestamp, run tests against app, record end timestamp
