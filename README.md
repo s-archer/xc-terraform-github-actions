@@ -1,14 +1,16 @@
-# F5 Distributed Cloud Terraform Github Actions
+# F5 Distributed Cloud, Terraform, Github Actions.
 
 ![alt text for screen readers](/images/xc-to-public-ip.png "Logical diagram of F5 Distributed Cloud test scenario")
 
 See https://f5.com/cloud for product details
 
-The concept for this project is to show how a WAF policy can be automatically refined within a closed test environment using F5 Distributed Cloud.  
+This project provides an example WAF (Web Application Firewall) deployment and automatic policy tuning within a closed test environment using F5 Distributed Cloud.  
 
-The scenario is that a WAF is deployed into a secure test environment and 'good' traffic sent to the app, through the WAF to ensure the WAF does not inadvertently block.  If the WAF blocks anything, it is considered to be false-positive and is likely to adversely affect the function of the application. A decision must be made between 'speed' (loosen the WAF policy by creating an exception rule) or 'security' (request that the application is remediated).
+In this demonstration scenario a WAF is deployed into a secure test environment and 'good' traffic sent to the app, via the WAF, to ensure that the WAF does not inadvertently block.  If the WAF blocks anything, it is considered to be false-positive and is likely to adversely affect the functionality of the application. A decision must be made between 'speed' (loosen the WAF policy by creating an exception rule) and 'security' (request that the application is remediated).
 
 If the choice is 'speed' then this project shows how a Github Actions Terraform workflow can run tests through a WAF, get the security events generated during the tests, and automatically create WAF exception rules.  There is also the option to move rules created automatically into a mandatory list, so that they are permenantly stored within the configuration. 
+
+If the choice is 'security' then the rule should not become mandatory; the application should be remediated instead.
 
 ## How to use this project:
 
