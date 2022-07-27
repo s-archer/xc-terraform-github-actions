@@ -4,7 +4,7 @@
 
 See https://f5.com/cloud for product details
 
-This project provides an example WAF (Web Application Firewall) deployment and automatic policy tuning within a closed test environment using F5 Distributed Cloud.  
+This project provides an example CI/CD pipeline WAF (Web Application Firewall) deployment and automatic policy tuning within a closed test environment using F5 Distributed Cloud.  
 
 In this demonstration scenario a WAF is deployed into a secure test environment and 'good' traffic sent to the app, via the WAF, to ensure that the WAF does not inadvertently block.  If the WAF blocks anything, it is considered to be false-positive and is likely to adversely affect the functionality of the application. A decision must be made between 'speed' (loosen the WAF policy by creating an exception rule) and 'security' (request that the application is remediated).
 
