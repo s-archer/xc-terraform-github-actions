@@ -40,9 +40,9 @@ Alternate workflow:
 
 - before third run:
     - uncomment the curl test you previously commented out, in ./.github/workflows/terraform.yml
-    - remove the content inside the braces `[ ]` in `waf_exclusion_rules = []` in the `vars.excl-rules.auto.tfvars` file and paste into the braces `[ ]` in ` default = []` in the `vars.excl-rules-mandatory.tf` file.  This becomes a madatory rule that will persist in the configuration.
+    - remove the content inside the braces `[]` in `waf_exclusion_rules = []` in the `vars.excl-rules.auto.tfvars` file and paste inside the braces `[]` in ` default = []` in the `vars.excl-rules-mandatory.tf` file.  This becomes a madatory rule that will persist in the configuration.
 
 - during third run:
     - record start timestamp, run tests against app, record end timestamp
-    - one test (that you just uncommented) intentionally generates 1 x new WAF security violation.  The other test 
+    - one test (that you just uncommented) intentionally generates 1 x new WAF security violation.  The other test does not generate WAF violation because there is now a mandatory WAF exception rule for that.
     - get security violations between timestamps, use the violations to generate WAF exception rule and apply to the LB (1 automatically created rule)
