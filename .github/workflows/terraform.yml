@@ -1,4 +1,4 @@
-name: "Terraform Pipeline v1.36"
+name: "Terraform Pipeline v1.37"
 on:
   push:
     branches:
