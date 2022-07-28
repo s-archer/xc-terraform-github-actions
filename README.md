@@ -39,7 +39,10 @@ If the choice is 'security' then the rule should not become mandatory; the appli
     - this time, the tests do not trigger WAF security events, because exception rules exist.
     - result is functioning application, with no WAF false-positives
 
-Remove LB, Origin and WAF in XC to reset the workflow.
+- To reset the workflow:
+    - manually remove LB, Origin and WAF in XC. 
+    - If exists, remove the content inside the braces `[]` in `waf_exclusion_rules = []` in the `vars.excl-rules.auto.tfvars` file
+    - If exists, remove the content inside the braces `[]` in ` default = []` in the `vars.excl-rules-mandatory.tf`
 
 ## Example Workflow 2
 
@@ -65,4 +68,7 @@ Remove LB, Origin and WAF in XC to reset the workflow.
     - get security violations between timestamps, use the violations to generate 1 x automatic WAF exception rule and apply to the LB
     - result is WAF with one mandatory and one automatic exception rule.
 
-Remove LB, Origin and WAF in XC to reset the workflow.
+- To reset the workflow:
+    - manually remove LB, Origin and WAF in XC. 
+    - If exists, remove the content inside the braces `[]` in `waf_exclusion_rules = []` in the `vars.excl-rules.auto.tfvars` file
+    - If exists, remove the content inside the braces `[]` in ` default = []` in the `vars.excl-rules-mandatory.tf`
