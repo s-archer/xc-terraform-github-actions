@@ -1,5 +1,5 @@
 resource "volterra_origin_pool" "origin" {
-  name                   = format("%s-tf", var.shortname)
+  name                   = format("%s-git-act-tf", var.shortname)
   namespace              = var.namespace
   description            = "Terraform created origin pool"
   loadbalancer_algorithm = "LB_OVERRIDE"
@@ -22,7 +22,7 @@ resource "volterra_origin_pool" "origin" {
 }
 
 resource "volterra_http_loadbalancer" "lb" {
-  name        = format("%s-tf", var.shortname)
+  name        = format("%s-git-act-tf", var.shortname)
   namespace   = var.namespace
   description = "Created by Terraform"
   domains     = [var.domain]
@@ -102,7 +102,7 @@ resource "volterra_http_loadbalancer" "lb" {
 }
 
 resource "volterra_app_firewall" "recommended" {
-  name      = format("%s-tf", var.shortname)
+  name      = format("%s-git-act-tf", var.shortname)
   namespace = var.namespace
 
   blocking = true
