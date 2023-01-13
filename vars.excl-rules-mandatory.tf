@@ -5,5 +5,5 @@ variable "waf_exclusion_rules_mandatory" {
     host         = string
     path         = string
   }))
-  default = []
+  default = [{"host":"juiceshop-waf.volt.archf5.com","method":"GET","path":"/rest/etc/passwd","signature_id":"200010468"},{"host":"juiceshop-waf.volt.archf5.com","method":"GET","path":"/rest/products/1/reviews","signature_id":"200002053"}]
 }
