@@ -46,7 +46,6 @@ jobs:
            -H 'sec-fetch-site: same-origin' \
            -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36' \
            --compressed
-           sleep 5
            curl 'https://juiceshop-waf.volt.archf5.com/rest/user/whoami/../../etc/passwd' \
             -H 'authority: juiceshop-waf.volt.archf5.com' \
             -H 'accept: application/json, text/plain, */*' \
@@ -66,6 +65,10 @@ jobs:
             --compressed
           sleep 5
         continue-on-error: true
+
+      - name: Wait for 25 sec
+        run: |  
+          sleep 25
 
       - name: Record End Timestamp
         run: |  
