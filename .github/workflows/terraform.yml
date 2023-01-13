@@ -70,9 +70,9 @@ jobs:
         run: |  
           echo "TF_VAR_timestamp_end=$(date +%s)" >> $GITHUB_ENV
 
-      - name: Wait For Events Into DB
-        run: |  
-          sleep 60
+      # - name: Wait For Events Into DB
+      #   run: |  
+      #     sleep 60
         
       - name: Terraform Init
         id: init1
@@ -143,4 +143,4 @@ jobs:
       # - name: Terraform Plan Status
       #   if: steps.plan.outcome == 'failure'
       #   run: exit 1
-      # added a comment
+      # added a comment 1
