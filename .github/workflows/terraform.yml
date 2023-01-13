@@ -80,21 +80,21 @@ jobs:
           terraform init \
           -backend-config="access_key=${{ secrets.AZURE_BACKEND_KEY }}" 
 
-      # - name: Terraform Validate
-      #   id: validate1
-      #   run: terraform validate
+      - name: Terraform Validate
+        id: validate1
+        run: terraform validate
 
-      # - name: Terraform Plan
-      #   id: plan1
-      #   if: github.event_name == 'pull_request'
-      #   run: terraform plan -no-color -input=false
-      #   env:
-      #     VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }} 
+      - name: Terraform Plan
+        id: plan1
+        if: github.event_name == 'pull_request'
+        run: terraform plan -no-color -input=false
+        env:
+          VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }} 
 
-      - name: Terraform Destroy
+      - name: Terraform Apply
         id: apply1
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform destroy -auto-approve -no-color -input=false
+        run: terraform apply -auto-approve -no-color -input=false
         env:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
           # TF_LOG: debug 
