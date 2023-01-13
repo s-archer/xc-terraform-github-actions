@@ -72,7 +72,7 @@ jobs:
 
       # - name: Wait For Events Into DB
       #   run: |  
-      #     sleep 60
+      #     sleep 600
         
       - name: Terraform Init
         id: init1
