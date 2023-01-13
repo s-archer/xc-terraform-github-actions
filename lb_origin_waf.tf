@@ -111,6 +111,14 @@ resource "volterra_app_firewall" "recommended" {
   default_anonymization      = true
   use_default_blocking_page  = true
   default_bot_setting        = true
-  default_detection_settings = true
+  detection_settings {
+    signature_selection_setting {
+      default_attack_type_settings = true
+      high_medium_low_accuracy_signatures = true
+    }
+    enable_suppression = true
+    enable_threat_campaigns = true
+    default_violation_settings = true
+  }
   use_loadbalancer_setting   = true
 }
