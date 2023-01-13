@@ -81,7 +81,7 @@ jobs:
           -backend-config="access_key=${{ secrets.AZURE_BACKEND_KEY }}" 
 
       - name: Terraform Taint
-        id: validate1
+        id: taint1
         run: terraform taint volterra_api_credential.api
       
       - name: Terraform Validate
