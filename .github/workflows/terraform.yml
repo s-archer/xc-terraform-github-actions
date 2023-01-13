@@ -66,18 +66,17 @@ jobs:
           sleep 5
         continue-on-error: true
 
-      - name: Wait for 25 sec
+      # Adding wait here because 10s between start/emd timestamp is no longer supported.  Needs to be longer.  Also need to allow time for events 
+      # to become available in elastic search
+
+      - name: Wait For Events Into DB
         run: |  
-          sleep 25
+          sleep 60
 
       - name: Record End Timestamp
         run: |  
           echo "TF_VAR_timestamp_end=$(date +%s)" >> $GITHUB_ENV
 
-      # - name: Wait For Events Into DB
-      #   run: |  
-      #     sleep 600
-        
       - name: Terraform Init
         id: init1
         run: |
@@ -147,4 +146,4 @@ jobs:
       # - name: Terraform Plan Status
       #   if: steps.plan.outcome == 'failure'
       #   run: exit 1
-      # added a comment 1
+      # added a comment 2
