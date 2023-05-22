@@ -14,17 +14,21 @@ If the choice is 'security' then the rule should not become mandatory; the appli
 
 ## How to use this project:
 
-- clone the repo
-- update the `vars.auto-tfvars` file to suit your environment
-- make a code change
-- `git add .`
-- `git commit -m "my message"`
-- `git push`   
-    - `git push` causes the Github Actions workflow to trigger.
+- 1. clone the repo
+- 2. update the `vars.auto-tfvars` file to suit your environment
+- 3. start 'run'
+    - make a code change
+    - `git add .`
+    - `git commit -m "my message"`
+    - `git push`   
+        - `git push` causes the Github Actions workflow to trigger.
+    - the Github Actions workflow will run
+    - `git pull` to get the updated files
+    - repeat from [3] for next 'run', in acordance with Example workflows below.
 
 ## Example workflow 1
 
-- during first run:
+- during first run
     - create a LB & WAF on F5 Distributed Cloud Regional Edges, with an Origin pointing at another public site.
     - result is LB & WAF with no exceptions
 
@@ -36,8 +40,10 @@ If the choice is 'security' then the rule should not become mandatory; the appli
 
 - during third run:
     - record start timestamp, run tests against app, record end timestamp
-    - this time, the tests do not trigger WAF security events, because exception rules exist.
+    - this time, the tests do not trigger WAF security events, because exception rules exist
     - result is functioning application, with no WAF false-positives
+
+- Subsequent runs should flip/flop between 'successful test' and 'waf blocked test', because the runs also flip/flop between 'add exceptions to LB' and 'remove expections from LB'
 
 - To reset the workflow:
     - manually remove LB, Origin and WAF in XC. 
@@ -69,6 +75,12 @@ If the choice is 'security' then the rule should not become mandatory; the appli
     - result is WAF with one mandatory and one automatic exception rule.
 
 - To reset the workflow:
+    - git pull
+    - If exists, remove the content inside the braces `[]` in `waf_exclusion_rules = []` in the `vars.excl-rules.auto.tfvars` file
+    - If exists, remove the content inside the braces `[]` in ` default = []` in the `vars.excl-rules-mandatory.tf`
+    - git add .; git commit -m "reset config"; git push
+
+- To reset the workflow AND remove the LB/Origin:
     - manually remove LB, Origin and WAF in XC. 
     - If exists, remove the content inside the braces `[]` in `waf_exclusion_rules = []` in the `vars.excl-rules.auto.tfvars` file
     - If exists, remove the content inside the braces `[]` in ` default = []` in the `vars.excl-rules-mandatory.tf`
