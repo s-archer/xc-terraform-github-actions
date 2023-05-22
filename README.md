@@ -1,4 +1,4 @@
-# F5 Distributed Cloud, Terraform, Github Actions.
+# F5 Distributed Cloud, Terraform, Github Actions..
 
 ![alt text for screen readers](/images/xc-to-public-ip.png "Logical diagram of F5 Distributed Cloud test scenario")
 
