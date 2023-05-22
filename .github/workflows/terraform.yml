@@ -71,7 +71,7 @@ jobs:
 
       - name: Wait For Events Into DB
         run: |  
-          sleep 30
+          sleep 25
 
       - name: Record End Timestamp
         run: |  
