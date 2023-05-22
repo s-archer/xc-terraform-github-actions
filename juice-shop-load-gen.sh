@@ -1,7 +1,7 @@
 !#/bin/bash
 
 
-# bad traffic
+# bad trafficc
 
 curl 'https://juice.gal.volcloud.net/rest/products/1/reviews?a%20or%201%3D1%3B%20select%20%2A%20from%20mysql.user' \
   -H 'authority: juice.gal.volcloud.net' \
