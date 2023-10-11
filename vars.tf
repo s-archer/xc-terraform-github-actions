@@ -1,5 +1,4 @@
 locals {
-
   api_url                     = format("https://%s.%s/api", var.tenant, var.console_url)
   api_get_security_events_url = format("https://%s.%s/api/data/namespaces/%s/app_security/events", var.tenant, var.console_url, var.namespace)
 }
