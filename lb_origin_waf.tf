@@ -121,5 +121,5 @@ resource "volterra_app_firewall" "recommended" {
   #   enable_threat_campaigns = true
   #   default_violation_settings = true
   # }
-  use_loadbalancer_setting   = true
+  use_loadbalancer_setting = true
 }

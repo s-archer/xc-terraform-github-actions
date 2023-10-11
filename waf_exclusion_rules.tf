@@ -19,9 +19,8 @@ resource "volterra_api_credential" "api" {
 
 data "http" "volterra_get_blocked_by_waf" {
   provider = http-full
-
-  url    = local.api_get_security_events_url
-  method = "POST"
+  url      = local.api_get_security_events_url
+  method   = "POST"
   request_headers = {
     Content-Type  = "application/json"
     Authorization = format("APIToken %s", volterra_api_credential.api.data)
