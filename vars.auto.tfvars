@@ -6,7 +6,7 @@ origin_fqdn  = "juiceshop.volt.archf5.com"
 origin_ip    = "10.0.0.3"
 origin_port  = 443
 origin_site  = "arch-aws-juice-site"
-shortname    = "juice-lb"
+shortname    = "juice"
 tenant       = "f5-emea-ent"
 
 # name           = "app-a-public"
