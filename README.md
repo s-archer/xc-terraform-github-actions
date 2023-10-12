@@ -16,7 +16,12 @@ If the choice is 'security' then the rule should not become mandatory; the appli
 
 - 1. clone the repo
 - 2. update the `vars.auto-tfvars` file to suit your environment
-- 3. start 'run'
+    - `api_p12_file` should point to the F5 Distributed Cloud credential (.p12 certificate)
+- 3. Modify the `backend "azurerm"` configuration in `main.tf`
+- 4. In your GitHub repo, go to `Settings`>`Security`>`Secrets and variables`>`Actions` and create two `Repository Secrets`:
+    - `AZURE_BACKEND_KEY` containing the key value to access the Azure Storage backend (the one defined in `main.tf`)
+    - `VES_P12_PASSWORD` containing the passphrase for the F5 Distributed Cloud credential (.p12 certificate)
+- 5. start 'run'
     - make a code change: rename `lb_origin_waf.tf.DELETE` to `lb_origin_waf.tf`
     - `git add .`
     - `git commit -m "my message"`
