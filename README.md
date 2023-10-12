@@ -17,7 +17,7 @@ If the choice is 'security' then the rule should not become mandatory; the appli
 - 1. clone the repo
 - 2. update the `vars.auto-tfvars` file to suit your environment
 - 3. start 'run'
-    - make a code change
+    - make a code change: rename `lb_origin_waf.tf.DELETE` to `lb_origin_waf.tf`
     - `git add .`
     - `git commit -m "my message"`
     - `git push`   
@@ -46,9 +46,15 @@ If the choice is 'security' then the rule should not become mandatory; the appli
 - Subsequent runs should flip/flop between 'successful test' and 'waf blocked test', because the runs also flip/flop between 'add exceptions to LB' and 'remove expections from LB'
 
 - To reset the workflow:
-    - manually remove LB, Origin and WAF in XC. 
+    - rename `lb_origin_waf.tf` to `lb_origin_waf.tf.DELETE` 
     - If exists, remove the content inside the braces `[]` in `waf_exclusion_rules = []` in the `vars.excl-rules.auto.tfvars` file
     - If exists, remove the content inside the braces `[]` in ` default = []` in the `vars.excl-rules-mandatory.tf`
+    - `git add .`
+    - `git commit -m "my message"`
+    - `git push`   
+        - `git push` causes the Github Actions workflow to trigger.
+    - the Github Actions workflow will run and remove the LB, Origin and WAF Policy
+
 
 ## Example Workflow 2
 
@@ -81,6 +87,11 @@ If the choice is 'security' then the rule should not become mandatory; the appli
     - git add .; git commit -m "reset config"; git push
 
 - To reset the workflow AND remove the LB/Origin:
-    - manually remove LB, Origin and WAF in XC. 
+    - rename `lb_origin_waf.tf` to `lb_origin_waf.tf.DELETE` 
     - If exists, remove the content inside the braces `[]` in `waf_exclusion_rules = []` in the `vars.excl-rules.auto.tfvars` file
     - If exists, remove the content inside the braces `[]` in ` default = []` in the `vars.excl-rules-mandatory.tf`
+    - `git add .`
+    - `git commit -m "my message"`
+    - `git push`   
+        - `git push` causes the Github Actions workflow to trigger.
+    - the Github Actions workflow will run and remove the LB, Origin and WAF Policy
