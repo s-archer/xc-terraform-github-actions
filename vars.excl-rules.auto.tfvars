@@ -1,1 +1,1 @@
-waf_exclusion_rules = []
+waf_exclusion_rules = [{"host":"juiceshop-waf.volt.archf5.com","method":"GET","path":"/.git/config","signature_id":"200010136"},{"host":"juiceshop-waf.volt.archf5.com","method":"GET","path":"/etc/passwd","signature_id":"200010468"},{"host":"juiceshop-waf.volt.archf5.com","method":"GET","path":"/rest/products/1/reviews","signature_id":"200002053"}]
