@@ -54,6 +54,7 @@ If the choice is 'security' then the rule should not become mandatory; the appli
     - `git push`   
         - `git push` causes the Github Actions workflow to trigger.
     - the Github Actions workflow will run and remove the LB, Origin and WAF Policy
+    - `git pull`
 
 
 ## Example Workflow 2
@@ -95,3 +96,4 @@ If the choice is 'security' then the rule should not become mandatory; the appli
     - `git push`   
         - `git push` causes the Github Actions workflow to trigger.
     - the Github Actions workflow will run and remove the LB, Origin and WAF Policy
+    - `git pull`
