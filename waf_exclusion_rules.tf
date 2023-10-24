@@ -39,4 +39,3 @@ resource "local_file" "waf_exclusion_rules_defined_within_interval" {
   content  = format("waf_exclusion_rules = %s", data.jq_query.json_parser.result != "null" ? data.jq_query.json_parser.result : "[]")
   filename = "vars.excl-rules.auto.tfvars"
 }
-
