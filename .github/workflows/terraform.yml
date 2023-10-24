@@ -87,9 +87,9 @@ jobs:
         id: validate1
         run: terraform validate
 
-      - name: Terraform Taint
-        id: taint1
-        run: terraform taint volterra_api_credential.api
+      # - name: Terraform Taint
+      #   id: taint1
+      #   run: terraform destroy -auto-approve -no-color -input=false
 
       - name: Terraform Plan
         id: plan1
