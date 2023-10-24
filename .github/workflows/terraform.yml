@@ -67,7 +67,7 @@ jobs:
         continue-on-error: true
 
       # Adding wait here because 10s between start/emd timestamp is no longer supported.  Needs to be longer.  Also need to allow time for events 
-      # to become available in elastic search
+      # to become available in elastic search.
 
       # - name: Wait For Events Into DB
       #   run: |  
