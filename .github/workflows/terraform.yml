@@ -69,9 +69,9 @@ jobs:
       # Adding wait here because 10s between start/emd timestamp is no longer supported.  Needs to be longer.  Also need to allow time for events 
       # to become available in elastic search.
 
-      # - name: Wait For Events Into DB
-      #   run: |  
-      #     sleep 60
+      - name: Wait For Events Into DB
+        run: |  
+          sleep 60
 
       - name: Record End Timestamp
         run: |  
@@ -86,10 +86,6 @@ jobs:
       - name: Terraform Validate
         id: validate1
         run: terraform validate
-
-      # - name: Terraform Taint
-      #   id: taint1
-      #   run: terraform destroy -auto-approve -no-color -input=false
 
       - name: Terraform Plan
         id: plan1
