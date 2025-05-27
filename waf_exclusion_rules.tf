@@ -42,10 +42,10 @@ data "jq_query" "json_parser" {
         end
       ),
       context_name: (
-        if signatures[].context | test("^parameter \\(") then
-          (signatures[].context | capture("^parameter \\((?<val>[^\\s)]+)") | .val)
-        elif signatures[[]].context | test("^cookie \\(") then # Original has `signatures[[]].context` here, likely a typo
-          (signatures[].context | capture("^cookie \\((?<val>[^\\s)]+)") | .val)
+        if signatures[].context | test("^parameter \\\\(") then
+          (signatures[].context | capture("^parameter \\\\((?<val>[^\\\\s)]+)") | .val)
+        elif signatures[[]].context | test("^cookie \\\\(") then # Original has `signatures[[]].context` here, likely a typo
+          (signatures[].context | capture("^cookie \\\\((?<val>[^\\s)]+)") | .val)
         else
           empty
         end
