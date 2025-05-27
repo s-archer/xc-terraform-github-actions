@@ -27,10 +27,10 @@ data "jq_query" "json_parser" {
   # query = "[.events[] | fromjson | select( .signatures != {} ) | { signature_id: .signatures[].id, method: .method, path: .req_path, host: .authority, context: .signatures[].context } ] | unique"
   query = <<EOT
 [
-  .events[] 
-  | fromjson 
-  | select(.signatures != {}) 
-  | { signature_id: signatures[].id,
+  .events[]
+  | fromjson
+  | select(.signatures != {}) # This selects events where 'signatures' is not an empty object
+  | { signature_id: signatures[].id, # This implicitly iterates over 'signatures' array
       method: .method,
       path: .req_path,
       host: .authority,
@@ -44,7 +44,7 @@ data "jq_query" "json_parser" {
       context_name: (
         if signatures[].context | test("^parameter \\(") then
           (signatures[].context | capture("^parameter \\((?<val>[^\\s)]+)") | .val)
-        elif signatures[].context | test("^cookie \\(") then
+        elif signatures[[]].context | test("^cookie \\(") then # Original has `signatures[[]].context` here, likely a typo
           (signatures[].context | capture("^cookie \\((?<val>[^\\s)]+)") | .val)
         else
           empty
