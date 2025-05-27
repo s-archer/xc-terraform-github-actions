@@ -24,35 +24,7 @@ data "jq_query" "json_parser" {
   depends_on = [data.http.volterra_get_blocked_by_waf]
 
   data  = data.http.volterra_get_blocked_by_waf.response_body
-  # query = "[.events[] | fromjson | select( .signatures != {} ) | { signature_id: .signatures[].id, method: .method, path: .req_path, host: .authority, context: .signatures[].context } ] | unique"
-  query = <<EOT
-[
-  .events[]
-  | fromjson
-  | select(.signatures != {}) # This selects events where 'signatures' is not an empty object
-  | { signature_id: signatures[].id, # This implicitly iterates over 'signatures' array
-      method: .method,
-      path: .req_path,
-      host: .authority,
-      context: (
-        if signatures[].context | test("^parameter") then "CONTEXT_PARAMETER"
-        elif signatures[].context | test("^url") then "CONTEXT_URL"
-        elif signatures[].context | test("^cookie") then "CONTEXT_COOKIE"
-        else signatures[].context
-        end
-      ),
-      context_name: (
-        if signatures[].context | test("^parameter \\\\(") then
-          (signatures[].context | capture("^parameter \\\\((?<val>[^\\\\s)]+)") | .val)
-        elif signatures[[]].context | test("^cookie \\\\(") then # Original has `signatures[[]].context` here, likely a typo
-          (signatures[].context | capture("^cookie \\\\((?<val>[^\\s)]+)") | .val)
-        else
-          empty
-        end
-      )
-    }
-] | unique
-EOT
+  query = "[.events[] | fromjson | select( .signatures != {} ) | { signature_id: .signatures[].id, method: .method, path: .req_path, host: .authority, context: .signatures[].context } ] | unique"
 }
 
 resource "local_file" "waf_exclusion_rules_defined_within_interval" {
