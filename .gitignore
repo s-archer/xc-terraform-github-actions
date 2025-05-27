@@ -1,5 +1,6 @@
 # Other files including my vars file.  vars.tf.example will be allowed.
 *.pem
+.DS_Store
 # /*/vars.tf
 # /vars.tf
 # Local .terraform directories
