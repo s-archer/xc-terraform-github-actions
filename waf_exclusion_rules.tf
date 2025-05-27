@@ -30,24 +30,22 @@ data "jq_query" "json_parser" {
   .events[] 
   | fromjson 
   | select(.signatures != {}) 
-  | .signatures[] 
-  | {
-      signature_id: .id,
+  | { signature_id: signatures[].id,
       method: .method,
       path: .req_path,
       host: .authority,
       context: (
-        if .context | test("^parameter") then "CONTEXT_PARAMETER"
-        elif .context | test("^url") then "CONTEXT_URL"
-        elif .context | test("^cookie") then "CONTEXT_COOKIE"
-        else .context
+        if signatures[].context | test("^parameter") then "CONTEXT_PARAMETER"
+        elif signatures[].context | test("^url") then "CONTEXT_URL"
+        elif signatures[].context | test("^cookie") then "CONTEXT_COOKIE"
+        else signatures[].context
         end
       ),
       context_name: (
-        if .context | test("^parameter \\(") then
-          (.context | capture("^parameter \\((?<val>[^\\s)]+)") | .val)
-        elif .context | test("^cookie \\(") then
-          (.context | capture("^cookie \\((?<val>[^\\s)]+)") | .val)
+        if signatures[].context | test("^parameter \\(") then
+          (signatures[].context | capture("^parameter \\((?<val>[^\\s)]+)") | .val)
+        elif signatures[].context | test("^cookie \\(") then
+          (signatures[].context | capture("^cookie \\((?<val>[^\\s)]+)") | .val)
         else
           empty
         end
