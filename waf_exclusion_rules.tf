@@ -24,7 +24,7 @@ data "jq_query" "json_parser" {
   depends_on = [data.http.volterra_get_blocked_by_waf]
 
   data  = data.http.volterra_get_blocked_by_waf.response_body
-  query = "[.events[] | fromjson | select( .signatures != {} ) | { signature_id: .signatures[].id, method: .method, path: .req_path, host: .authority, context: .context } ] | unique"
+  query = "[.events[] | fromjson | select( .signatures != {} ) | { signature_id: .signatures[].id, method: .method, path: .req_path, host: .authority, context: .signatures[].context } ] | unique"
 }
 
 resource "local_file" "waf_exclusion_rules_defined_within_interval" {
