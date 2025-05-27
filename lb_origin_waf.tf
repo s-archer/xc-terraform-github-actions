@@ -34,8 +34,6 @@ resource "volterra_http_loadbalancer" "lb" {
   disable_rate_limit              = true
   no_service_policies             = true
   disable_waf                     = true
-  # UPDATED 1 LINE BELOW
-  # multi_lb_app                    = true
   user_id_client_ip               = true
 
   https_auto_cert {
