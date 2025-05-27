@@ -1,19 +1,30 @@
 
+# resource "volterra_api_credential" "api" {
+#   name                = format("%s-api-token", var.shortname)
+#   api_credential_type = "API_TOKEN"
+
+#   provisioner "local-exec" {
+#     when    = destroy
+#     command = <<-EOF
+#       #!/bin/bash
+#       NAME=$(curl --location --request GET 'https://f5-emea-ent.console.ves.volterra.io/api/web/namespaces/system/api_credentials' \
+#         --header 'Authorization: APIToken ${self.data}'| jq 'first(.items[] | select (.name | contains("${self.name}")) | .name)') 
+#       curl --location --request POST 'https://f5-emea-ent.console.ves.volterra.io/api/web/namespaces/system/revoke/api_credentials' \
+#         --header 'Authorization: APIToken ${self.data}' \
+#         --header 'Content-Type: application/json' \
+#         -d "$(jq -n --arg n "$NAME" '{"name": $n, "namespace": "system" }')"
+#     EOF
+#   }
+# }
+
 resource "volterra_api_credential" "api" {
   name                = format("%s-api-token", var.shortname)
   api_credential_type = "API_TOKEN"
-
-  provisioner "local-exec" {
-    when    = destroy
-    command = <<-EOF
-      #!/bin/bash
-      NAME=$(curl --location --request GET 'https://f5-emea-ent.console.ves.volterra.io/api/web/namespaces/system/api_credentials' \
-        --header 'Authorization: APIToken ${self.data}'| jq 'first(.items[] | select (.name | contains("${self.name}")) | .name)') 
-      curl --location --request POST 'https://f5-emea-ent.console.ves.volterra.io/api/web/namespaces/system/revoke/api_credentials' \
-        --header 'Authorization: APIToken ${self.data}' \
-        --header 'Content-Type: application/json' \
-        -d "$(jq -n --arg n "$NAME" '{"name": $n, "namespace": "system" }')"
-    EOF
+  created_at          = timestamp()
+  lifecycle {
+    ignore_changes = [
+      created_at
+    ]
   }
 }
 
