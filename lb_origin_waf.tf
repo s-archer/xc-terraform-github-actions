@@ -121,5 +121,4 @@ resource "volterra_app_firewall" "recommended" {
   # }
   # use_loadbalancer_setting = true
 }
-# add comment
 
