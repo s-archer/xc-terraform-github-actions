@@ -2,7 +2,8 @@ terraform {
   required_providers {
     volterra = {
       source  = "volterraedge/volterra"
-      version = "0.11.9"
+      # version = "0.11.9"
+      version = "0.11.43"
     }
     http-full = {
       source = "salrashid123/http-full"
