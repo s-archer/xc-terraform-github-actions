@@ -42,7 +42,7 @@ data "http" "volterra_get_blocked_by_waf" {
 data "jq_query" "json_parser" {
   depends_on = [data.http.volterra_get_blocked_by_waf]
 
-  data  = data.http.volterra_get_blocked_by_waf.body
+  data  = data.http.volterra_get_blocked_by_waf.response_body
   query = "[.events[] | fromjson | select( .signatures != {} ) | { signature_id: .signatures[].id, method: .method, path: .req_path, host: .authority } ] | unique"
 }
 

@@ -34,7 +34,8 @@ resource "volterra_http_loadbalancer" "lb" {
   disable_rate_limit              = true
   no_service_policies             = true
   disable_waf                     = true
-  multi_lb_app                    = true
+  # UPDATED 1 LINE BELOW
+  # multi_lb_app                    = true
   user_id_client_ip               = true
 
   https_auto_cert {
@@ -66,7 +67,8 @@ resource "volterra_http_loadbalancer" "lb" {
     # for_each = var.waf_exclusion_rules
     for_each = jsondecode(data.jq_query.json_parser.result != "null" ? data.jq_query.json_parser.result : "[]")
     content {
-      exclude_rule_ids = []
+      # UPDATED 1 LINE BELOW
+      # exclude_rule_ids = []
       metadata {
         name = "waf-exlusion-rule-${substr(uuid(), 0, 7)}"
       }
@@ -75,6 +77,8 @@ resource "volterra_http_loadbalancer" "lb" {
       path_regex  = waf_exclusion_rules.value.path
       app_firewall_detection_control {
         exclude_signature_contexts {
+          # UPDATED 1 LINE BELOW
+          context = "CONTEXT_ANY"
           signature_id = waf_exclusion_rules.value.signature_id
         }
       }
@@ -84,7 +88,8 @@ resource "volterra_http_loadbalancer" "lb" {
   dynamic "waf_exclusion_rules" {
     for_each = var.waf_exclusion_rules_mandatory
     content {
-      exclude_rule_ids = []
+      # UPDATED 1 LINE BELOW
+      # exclude_rule_ids = []
       metadata {
         name = "mandatory-waf-exlusion-rule-${substr(uuid(), 0, 7)}"
       }
@@ -93,6 +98,7 @@ resource "volterra_http_loadbalancer" "lb" {
       path_regex  = waf_exclusion_rules.value.path
       app_firewall_detection_control {
         exclude_signature_contexts {
+          context = "CONTEXT_ANY"
           signature_id = waf_exclusion_rules.value.signature_id
         }
       }
@@ -110,7 +116,7 @@ resource "volterra_app_firewall" "recommended" {
   allow_all_response_codes   = true
   default_anonymization      = true
   use_default_blocking_page  = true
-  default_bot_setting        = true
+  # default_bot_setting        = true
   default_detection_settings = true
   # detection_settings {
   #   signature_selection_setting {
@@ -121,5 +127,5 @@ resource "volterra_app_firewall" "recommended" {
   #   enable_threat_campaigns = true
   #   default_violation_settings = true
   # }
-  use_loadbalancer_setting = true
+  # use_loadbalancer_setting = true
 }

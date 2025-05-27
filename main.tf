@@ -25,6 +25,7 @@ terraform {
 provider "volterra" {
   url          = local.api_url
   api_p12_file = var.api_p12_file
+
 }
 
 provider "http-full" {}
