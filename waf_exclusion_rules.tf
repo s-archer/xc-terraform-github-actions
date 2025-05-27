@@ -26,7 +26,7 @@ data "jq_query" "json_parser" {
   data  = data.http.volterra_get_blocked_by_waf.response_body
   # query = "[.events[] | fromjson | select( .signatures != {} ) | { signature_id: .signatures[].id, method: .method, path: .req_path, host: .authority, context: .signatures[].context } ] | unique"
   query = <<EOT
-[
+"[
   .events[]
   | fromjson
   | select(.signatures != {}) # This selects events where 'signatures' is not an empty object
@@ -51,7 +51,7 @@ data "jq_query" "json_parser" {
         end
       )
     }
-] | unique
+] | unique"
 EOT
 }
 
