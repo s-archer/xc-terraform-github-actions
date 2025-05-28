@@ -63,13 +63,3 @@ variable "timestamp_end" {
   type    = string
   default = ""
 }
-
-variable "lb-waf-enabled" {
-  type    = integer
-  default = 0
-}
-
-variable "events-enabled" {
-  type    = integer
-  default = 0
-}
