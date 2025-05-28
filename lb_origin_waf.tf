@@ -73,7 +73,7 @@ resource "volterra_http_loadbalancer" "lb" {
       path_regex  = waf_exclusion_rules.value.path
       app_firewall_detection_control {
         exclude_signature_contexts {
-          context = "CONTEXT_ANY"
+          context      = "CONTEXT_ANY"
           signature_id = waf_exclusion_rules.value.signature_id
         }
       }
@@ -91,7 +91,7 @@ resource "volterra_http_loadbalancer" "lb" {
       path_regex  = waf_exclusion_rules.value.path
       app_firewall_detection_control {
         exclude_signature_contexts {
-          context = "CONTEXT_ANY"
+          context      = "CONTEXT_ANY"
           signature_id = waf_exclusion_rules.value.signature_id
         }
       }
