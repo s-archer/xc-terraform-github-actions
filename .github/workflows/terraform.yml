@@ -82,7 +82,11 @@ jobs:
         run: |
           terraform init \
           -backend-config="access_key=${{ secrets.AZURE_BACKEND_KEY }}" 
-      
+
+      - name: Terraform Format
+        id: fmt1
+        run: terraform fmt      
+
       - name: Terraform Validate
         id: validate1
         run: terraform validate
@@ -97,14 +101,14 @@ jobs:
       - uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
         env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+          PLAN: "terraform\n${{ steps.plan1.outputs.stdout }}"
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt1.outcome }}\`
+            #### Terraform Initialization ⚙️\`${{ steps.init1.outcome }}\`
+            #### Terraform Validation 🤖\`${{ steps.validate1.outcome }}\`
+            #### Terraform Plan 📖\`${{ steps.plan1.outcome }}\`
 
             <details><summary>Show Plan</summary>
 
