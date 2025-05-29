@@ -14,14 +14,14 @@ If the choice is 'security' then the rule should not become mandatory; the appli
 
 ## How to use this project:
 
-- 1. clone the repo
-- 2. update the `vars.auto-tfvars` file to suit your environment
+- 1. Clone the repo
+- 2. Update the `vars.auto-tfvars` file to suit your environment
     - `api_p12_file` should point to the F5 Distributed Cloud credential (.p12 certificate)
 - 3. Modify the `backend "azurerm"` configuration in `main.tf`
 - 4. In your GitHub repo, go to `Settings`>`Security`>`Secrets and variables`>`Actions` and create two `Repository Secrets`:
     - `AZURE_BACKEND_KEY` containing the key value to access the Azure Storage backend (the one defined in `main.tf`)
     - `VES_P12_PASSWORD` containing the passphrase for the F5 Distributed Cloud credential (.p12 certificate)
-- 5. start 'run'
+- 5. To initiate the pipeline:
     - make a code change: rename `lb_origin_waf.tf.DELETE` to `lb_origin_waf.tf`
     - `git add .`
     - `git commit -m "my message"`
@@ -52,8 +52,8 @@ If the choice is 'security' then the rule should not become mandatory; the appli
 
 - To reset the workflow:
     - rename `lb_origin_waf.tf` to `lb_origin_waf.tf.DELETE` 
-    - If exists, remove the content inside the braces `[]` in `waf_exclusion_rules = []` in the `vars.excl-rules.auto.tfvars` file
-    - If exists, remove the content inside the braces `[]` in ` default = []` in the `vars.excl-rules-mandatory.tf`
+    - If exists, remove the content inside the braces `[]` in the `vars.excl-rules.auto.tfvars` file
+    - If exists, remove the content inside the braces `[]` in the `vars.excl-rules-mandatory.auto.tfvars`
     - `git add .`
     - `git commit -m "my message"`
     - `git push`   
@@ -78,7 +78,7 @@ If the choice is 'security' then the rule should not become mandatory; the appli
 
 - before third run:
     - uncomment the curl test you previously commented out, in ./.github/workflows/terraform.yml
-    - remove the content inside the braces `[]` in `waf_exclusion_rules = []` in the `vars.excl-rules.auto.tfvars` file and paste inside the braces `[]` in ` default = []` in the `vars.excl-rules-mandatory.tf` file.  This becomes a madatory rule that will persist in the configuration.
+    - remove the content inside the braces `[]` in the `vars.excl-rules.auto.tfvars` file and paste inside the braces `[]` in the `vars.excl-rules-mandatory.auto.tfvars` file.  This becomes a madatory rule that will persist in the configuration.
 
 - during third run:
     - record start timestamp, run tests against app, record end timestamp
@@ -88,14 +88,14 @@ If the choice is 'security' then the rule should not become mandatory; the appli
 
 - To reset the workflow:
     - git pull
-    - If exists, remove the content inside the braces `[]` in `waf_exclusion_rules = []` in the `vars.excl-rules.auto.tfvars` file
-    - If exists, remove the content inside the braces `[]` in ` default = []` in the `vars.excl-rules-mandatory.tf`
+    - If exists, remove the content inside the braces `[]` in the `vars.excl-rules.auto.tfvars` file
+    - If exists, remove the content inside the braces `[]` in the `vars.excl-rules-mandatory.auto.tfvars`
     - git add .; git commit -m "reset config"; git push
 
 - To reset the workflow AND remove the LB/Origin:
     - rename `lb_origin_waf.tf` to `lb_origin_waf.tf.DELETE` 
-    - If exists, remove the content inside the braces `[]` in `waf_exclusion_rules = []` in the `vars.excl-rules.auto.tfvars` file
-    - If exists, remove the content inside the braces `[]` in ` default = []` in the `vars.excl-rules-mandatory.tf`
+    - If exists, remove the content inside the braces `[]` in the `vars.excl-rules.auto.tfvars` file
+    - If exists, remove the content inside the braces `[]` in the `vars.excl-rules-mandatory.auto.tfvars` file.
     - `git add .`
     - `git commit -m "my message"`
     - `git push`   
