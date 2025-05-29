@@ -13,6 +13,16 @@ variable "waf_exclusion_rules" {
   default = []
 }
 
+variable "waf_exclusion_rules_mandatory" {
+  type = set(object({
+    signature_id = string
+    method       = string
+    host         = string
+    path         = string
+  }))
+  default = []
+}
+
 variable "console_url" {
   type    = string
   default = ""
